@@ -1,0 +1,30 @@
+apple
+asparagus
+banana
+birthday cake
+blueberry
+blackberry
+bread
+broccoli
+cake
+carrot
+donut
+cookie
+hamburger
+grapes
+ice cream
+hot dog
+lollipop
+mushroom
+peanut
+onion
+pear
+peas
+pizza
+sandwich
+potato
+popsicle
+pineapple
+strawberry
+string bean
+watermelon
