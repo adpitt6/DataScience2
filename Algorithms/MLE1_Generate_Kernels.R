@@ -13,7 +13,7 @@ foods <- read_delim("food.txt", delim = "\n",col_names = F)[[1]]
 likelihoods <- expand.grid(x = 0:255, y = 0:255) %>% as.tibble
 
 for(i in foods){
-	load(file.path("summary_data",paste0(i, ".rdata")))
+	load(file.path("summary_data", paste0(i, ".rdata")))
 	
 	# convert y values to positives
 	df.sum <- df.sum %>% mutate(y = y+255)

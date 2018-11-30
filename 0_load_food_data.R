@@ -25,14 +25,15 @@ library(purrr)
 foods <- read_delim("food.txt", delim = "\n",col_names = F)[[1]]
 
 if(!file.exists("binary_data")) dir.create("binary_data")
+if(!file.exists("binary_data_test")) dir.create("binary_data_test")
 
 ### Build Function for formatting one food
 ### save data as an R binary file
 format.one.food <- function(food){
 	df <- 
-	read_csv(file.path("train_simplified", paste0(food,".csv")),n_max = 5000)%>%
+	read_csv(file.path("train_simplified", paste0(food,".csv")),n_max = 6000)%>%
 	select(key_id, drawing) %>%
-	mutate(drawing = map(drawing, fromJSON)
+	mutate(drawing = map(drawing, ~fromJSON(., simplifyMatrix = F))
 	       ) %>%
 	unnest() %>%
 	mutate(drawing = map(drawing, ~do.call(.,what="rbind") %>% 
@@ -42,11 +43,11 @@ format.one.food <- function(food){
 	unnest(.id = "stroke") %>%
 	mutate(x = V1, y = -V2) %>%
 	select(key_id, stroke, x, y)
-	save(df, file = file.path("binary_data", paste0(food,".rdata")))
+	df[1:5000,] %>% save(file = file.path("binary_data", paste0(food,".rdata")))
+	df[5001:6000,] %>% save(file = file.path("binary_data_test", paste0(food,".rdata")))
 }
 
-### Attempt one formatting
-#format.one.food("banana")
+### Format each food
 
 for(i in foods){
 	cat(paste0("Preparing ", i, "s...\n"))
