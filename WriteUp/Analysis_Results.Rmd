@@ -1,9 +1,0 @@
----
-title: "Data Analysis"
-author: "Lacey Etzkorn"
-date: "11/16/2018"
-output: html_document
----
-Data Analysis: What statistical or computational method did you apply and why? What others did you consider?
-
-Narrative and Summary: What did you learn about the data? How did you answer the questions? How can you justify your answers? What are the limitations of the analyses?

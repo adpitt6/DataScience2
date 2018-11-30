@@ -1,9 +1,0 @@
----
-title: "Exploratory Data Analysis"
-author: "Lacey Etzkorn"
-date: "11/16/2018"
-output: html_document
----
-## Exploratory Data Analysis: 
-
-What visualizations did you use to look at your data in different ways? What are the different statistical methods you considered? Justify the decisions you made, and show any major changes to your ideas. How did you reach these conclusions? You should use this section to motivate the statistical analyses that you decided to use in the next section.

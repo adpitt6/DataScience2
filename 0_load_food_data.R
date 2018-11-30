@@ -43,8 +43,11 @@ format.one.food <- function(food){
 	unnest(.id = "stroke") %>%
 	mutate(x = V1, y = -V2) %>%
 	select(key_id, stroke, x, y)
-	df[1:5000,] %>% save(file = file.path("binary_data", paste0(food,".rdata")))
-	df[5001:6000,] %>% save(file = file.path("binary_data_test", paste0(food,".rdata")))
+	ids <- unique(df$key_id)
+	train <- filter(df,key_id %in% ids[1:5000])
+	test <- filter(df,key_id %in% ids[5001:6000])
+	save(train, file = file.path("binary_data", paste0(food,".rdata")))
+	save(test, file = file.path("binary_data_test", paste0(food,".rdata")))
 }
 
 ### Format each food
@@ -54,4 +57,3 @@ for(i in foods){
 	format.one.food(i)
 	cat(paste0(i, "s ready.\n"))
 }
-
