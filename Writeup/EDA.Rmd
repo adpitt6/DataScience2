@@ -1,0 +1,121 @@
+---
+title: "Exploratory Data Analysis"
+author: "Lacey Etzkorn"
+date: "11/16/2018"
+output: html_document
+---
+```{r, echo=FALSE}
+library(knitr)
+```
+
+#### Initial Plots
+
+The first task we had was to plot a lot of drawings all at once. Looking at drawings individually would have been very time consuming. We chose to overlay 500 drawings on top of one another of each type to get a sense of the variability of shapes for each drawing. Here are the plots for apples, mushrooms, and bread:
+
+##### Figure 1: 500 Drawings of Apples, Mushrooms, and Bread
+```{r, echo=F, out.width=300, out.height=300}
+myimages<-c("../plots/Apple2.png","../plots/Mushroom2.png","../plots/Bread2.png")
+knitr::include_graphics(myimages)
+```
+Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.
+
+We asked the question: what if we didn't connect the lines for each drawing? Since each drawing consists of a number of points connected in a path, we could just ignore how the points are connected and focus on the location of the points.
+
+##### Figure 2: 500 Densities of Apples, Mushrooms, and Bread
+```{r, echo=F, out.width=300, out.height=300}
+myimages<-c("../plots/Apple.png","../plots/Mushroom.png","../plots/Bread.png")
+knitr::include_graphics(myimages)
+```
+
+The images certainly become more difficult to recognize, but there is still a barely recognizeable shape there. This motivates our first approach: using the class distribution of the points to empirically construct a kernel that could help us classify the images.
+
+Our next step was to create a kernel by smoothing over the empirical distribution of the points for each image class. We used kernel smoothing with a package called "ks" to go from the sample densities to a smoothed kernel.
+
+##### Figure 3: Smoothed Class Kernels
+```{r, echo=F, out.width=1200, out.height=1500}
+knitr::include_graphics("../Algorithms/MLE1_Kernels.png")
+```
+
+We can still recognize some of the image classes from the kernels, however, for others we can't. We went back to the data and realized there might be a number of ways that each class can be drawn. Let's look at the watermelon, bananas, and peanuts. 
+
+##### Figure 4: 500 Drawings of Watermelons, Bananas, and Peanuts
+```{r, echo=F, out.width=300, out.height=300}
+myimages<-c("../plots/Watermelon2.png","../plots/Banana2.png","../plots/Peanut2.png")
+knitr::include_graphics(myimages)
+```
+
+It is very clear that people tended to draw two types of peanuts: a sideways peanut or a vertical peanut. Additionally, some people drew a half slice of watermelon while others drew a whole watermelon. If we look very carefully, we can see that there were many ways people chose to draw bananas. We can think of these variations as sub-classes. If we can somehow separate each class of drawings into less-variable sub-classes, and estimate a kernel for each subclass separately, our prediction algorithm might improve. One way we might think of separating each class into sub-classes is by a clustering approach. But what features might we use to cluster?
+
+We chose to do the clustering by measuring where each image hits the side of the 256 x 256 frame. We know that the images were preprocessed in such a way that each image hits both the top and left side of the frame as well as the bottom or the right sides. Whether and where the image hits each side of the frame might tell us what sub-class the image falls into.
+
+We can plot the multivariate distributions of the side-hit locations for each food class and visually scan for clustering patterns. We see the clustering patterns in watermelons, bananas, and peanuts below:
+
+##### Figure 5: Side-Hit Patterns for Watermelons (left), Bananas (center), and Peanuts (right)
+```{r, echo=F, out.width=300, out.height=300}
+myimages<-c("../plots/watermelon_cluster.png",
+	"../plots/banana_cluster.png",
+	"../plots/peanut_cluster.png")
+knitr::include_graphics(myimages)
+```
+
+If we look at the 500 watermelon sketches, we see that the half-circle watermelons tend to hit the right and left sides of the image at the very top, and they also tend not to hit the bottom of the image. On the other hand, the round watermelons tend to hit every side directly in the center. Hence, we see a clustering pattern in the distribution of where the watermelon images hit the side of the frame. 
+
+##### Figure 6: Side-Hit Patterns for Apples (left), Mushroom (center), and Bread (right)
+```{r, echo=F, out.width=300, out.height=300}
+myimages<-c("../plots/apple_cluster.png",
+	"../plots/mushroom_cluster.png",
+	"../plots/bread_cluster.png")
+knitr::include_graphics(myimages)
+```
+
+In contrast, there is no obvious clustering structure in the side-hit patterns for some of the food-classes with a recognizable empirical kernel. We see above that apples tend to hit every side in the middle. For mushrooms, it seems that where the mushroom hits the left side of the frame is correlated with where the mushroom hits the right side of the frame.
+
+If we scan all of the scatter matricies, we can see a clustering pattern in:
+
+1. Watermelon (3)
+
+2. Stringbean (2)
+
+3. Popsicle (2)
+
+4. Pizza (3)
+
+5. Pineapple (2)
+
+6. Peanut (2-3)
+
+7. Lollipop (2)
+
+8. Carrot (2)
+
+9. Banana (2)
+
+10. Asparagus (2)
+
+
+
+
+
+
+
+# 
+
+Another source of variation in the images that might make the kernels fuzzy is how the artist chose to orient their drawing. For some drawings, such as the apple, doodlers uniformly choose to place their apple upright. However, there was a lot of varaition in how artists chose to draw bananas.
+
+String Bean
+Potato
+Peanut
+Carrot
+Banana
+Asparagus
+
+##### Figure ... 
+```{r, echo=F, out.width=1200, out.height=1500}
+knitr::include_graphics("../Algorithms/Kernel_Correlation_Mat.png")
+```
+
+
+##### Figure ... 
+```{r, echo=F, out.width=1200, out.height=1500}
+knitr::include_graphics("../Algorithms/Kernel_Dendogram.png")
+```
