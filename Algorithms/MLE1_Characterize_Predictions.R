@@ -2,51 +2,55 @@
 library(tidyverse)
 
 ### Grab Prediction Files
-bin.files <- dir("MLE1_Predictions",full.names = T)
+bin.files1 <- dir("MLE1_Predictions",full.names = T)
+bin.files2 <- dir("MLE2_Predictions",full.names = T)
 
-for(i in bin.files){
-	load(i)
-	if(exists("pred.data")){
-		pred.data <- rbind(pred.data, predictions)
-	}else{
-		pred.data <- predictions
+combine.data <- function(file.list){
+	df <- data.frame()
+	for(i in file.list){
+		load(i)
+		df <- rbind(df, predictions)
+		
 	}
+	df <- df %>% mutate(truth = gsub(" ", "", truth))
+	return(df)
 }
-rm(bin.files, i, predictions)
 
-### fix truth labels
-pred.data <- 
-pred.data %>% mutate(truth = gsub(" ", "", truth))
+### grab data from both algorithms
+pred.data1 <- combine.data(bin.files1)
+pred.data2 <- combine.data(bin.files2)
 
+pred.data <- inner_join(pred.data1, select(pred.data2, -data), 
+		by = c("key_id","truth"), suffix = c(".1", ".2"))
+rm(bin.files1, bin.files2, pred.data1, pred.data2, combine.data)
 
 ### get accuracy
 accuracy <- 
 pred.data %>%
-mutate(truth = gsub(" ", "", truth)) %>%
 group_by(truth) %>%
-summarise(correct = sum(pred1==truth),
-          mode1 = names(sort(table(pred1), decreasing = T)[1]),
-          n.mode1 = sum(pred1==mode1),
-          mode2 = names(sort(table(pred1), decreasing = T)[2]),
-          n.mode2 = sum(pred1==mode2),
-          mode3 = names(sort(table(pred1), decreasing = T)[3]),
-          n.mode3 = sum(pred1==mode3)) %>%
-arrange(desc(correct)) 
+summarise(correct1 = sum(pred1.1==truth),
+          correct2 = sum(pred1.2==truth)) %>%
+mutate(improved = correct2 > correct1,
+       improvement = correct2/correct1) %>%
+arrange(desc(correct1)) 
 
 accuracy %>% print.data.frame()
 
 # which foods look like other foods?
-filter(accuracy, n.mode1 > correct) 
+# filter(accuracy, n.mode1 > correct) 
 
 # prediction matrix
-pred.mat <- pred.data %>% with(table(truth, pred1))
+pred.mat <- pred.data %>% with(table(truth, pred1.1))
 image(pred.mat)
 
 # save accuracy
-save(accuracy, file = file.path("Algorithms","MLE1_Accuracy.rdata"))
+save(accuracy, file = file.path("Algorithms","MLE2_Accuracy.rdata"))
 
 ### overall accuracy
-accuracy %>% summarise(total.acc =  sum(correct)/n()/1000)
+#accuracy %>% summarise(total.acc =  sum(correct)/n()/1000)
+accuracy %>%
+summarise(total.acc1 =  sum(correct1)/n()/1000,
+          total.acc2 =  sum(correct2)/n()/1000)
 
 ### identify and plot bad predictions
 bad.apples <- 

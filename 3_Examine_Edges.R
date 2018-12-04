@@ -1,6 +1,8 @@
 library(tidyverse)
 library(reshape2)
 
+if(!file.exists("cluster_data")) dir.create("cluster_data")
+
 ### Get binary data files
 bin.files <- dir("binary_data")
 
@@ -15,7 +17,8 @@ for(i in bin.files){
 	select(-stroke) %>%
 	nest(-key_id) %>%
 	# select only lowest sidehits and rightmost top/bottom hits
-	mutate(xmax = map(data, ~max(.$x)) %>% unlist,
+	mutate(data = map(data, ~ rotate.vert(.) %>% integer.xy %>% flip.y),
+	       xmax = map(data, ~max(.$x)) %>% unlist,
 	       xmin = map(data, ~min(.$x)) %>% unlist,
 	       ymax = map(data, ~max(.$y)) %>% unlist,
 	       ymin = map(data, ~min(.$y)) %>% unlist,
@@ -26,9 +29,12 @@ for(i in bin.files){
 	       right_x = xmax, 
 	       right_y = map(data, ~min(.$y[.$x == max(.$x)]))%>% unlist,
 	       left_x = xmin,
-	       left_y = map(data, ~min(.$y[.$x == min(.$x)]))%>% unlist) %>%
-	mutate(height = ymax - ymin, width = xmax- xmin,
+	       left_y = map(data, ~min(.$y[.$x == min(.$x)]))%>% unlist,
+	       height = ymax - ymin, width = xmax- xmin,
 	       hw = height / width)
+	
+	### Save transformations
+	save(edges, file = file.path("cluster_data",i))
 	
 	### Plot joint distributions of each side
 	png(paste0("plots/",food.i,"_cluster.png"), 

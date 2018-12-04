@@ -2,9 +2,7 @@
 title: 'Final Project: QuickDraw!'
 author: "Lacey Etzkorn"
 date: "11/16/2018"
-output: 
-	html_document:
-		toc: true
+output: html_document
 ---
 
 ## Motivation and Overview: 
@@ -43,7 +41,8 @@ Data was downloaded from the Kaggle website. The website provided two types of d
 
 We also made the decision to look at just a subset of the drawing types. We wanted to keep the data down to a manageable size. We chose to look at all of the foods, a total of 30 image classes. The drawing types for the foods are listed below:
 
-```{r}
+```{r echo = FALSE, message=FALSE}
+library(tidyverse)
 foods <- read_delim("../food.txt", delim = "\n",col_names = F)[[1]]
 foods
 ```

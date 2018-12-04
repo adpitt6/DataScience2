@@ -29,7 +29,9 @@ knitr::include_graphics(myimages)
 
 The images certainly become more difficult to recognize, but there is still a barely recognizeable shape there. This motivates our first approach: using the class distribution of the points to empirically construct a kernel that could help us classify the images.
 
-Our next step was to create a kernel by smoothing over the empirical distribution of the points for each image class. We used kernel smoothing with a package called "ks" to go from the sample densities to a smoothed kernel.
+#### Summarizing Food Classes via Empirical Kernels
+
+We create a kernel by smoothing over the empirical distribution of the points for each image class. We used kernel smoothing with a package called "ks" to go from the sample densities to a smoothed kernel.
 
 ##### Figure 3: Smoothed Class Kernels
 ```{r, echo=F, out.width=1200, out.height=1500}
@@ -44,9 +46,39 @@ myimages<-c("../plots/Watermelon2.png","../plots/Banana2.png","../plots/Peanut2.
 knitr::include_graphics(myimages)
 ```
 
-It is very clear that people tended to draw two types of peanuts: a sideways peanut or a vertical peanut. Additionally, some people drew a half slice of watermelon while others drew a whole watermelon. If we look very carefully, we can see that there were many ways people chose to draw bananas. We can think of these variations as sub-classes. If we can somehow separate each class of drawings into less-variable sub-classes, and estimate a kernel for each subclass separately, our prediction algorithm might improve. One way we might think of separating each class into sub-classes is by a clustering approach. But what features might we use to cluster?
+It is very clear that people tended to draw two types of peanuts: a sideways peanut or a vertical peanut. Additionally, some people drew a half slice of watermelon while others drew a whole watermelon. If we look very carefully, we can see that people draw bananas in many orientations. 
 
-We chose to do the clustering by measuring where each image hits the side of the 256 x 256 frame. We know that the images were preprocessed in such a way that each image hits both the top and left side of the frame as well as the bottom or the right sides. Whether and where the image hits each side of the frame might tell us what sub-class the image falls into.
+For the watermelons, we can think of the variations as sub-classes. If we can somehow separate the watermelon class of drawings into sub-classes (whole, half, wedge), and estimate a kernel for each subclass separately, our prediction algorithm might improve. 
+
+For bananas and peanuts, we can think of the variations in drawings being due to rotation. If we can find a way to rotate training and test data prior to kernel estimation and prediction (respectively), our algorithm may also improve.
+
+#### Rotating Data to a Standard Orientation
+
+A source of variation in the images is how the artist chose to orient their drawing. For some drawings, such as the apple, doodlers uniformly choose to place their apple upright. However, there was a lot of varaition in how artists chose to draw bananas (as seen above).
+
+We chose to rotate the images using a principal components (PC) rotation. We standardized the images so that the longest dimension of the image would go in the $y$ direction. We then rescaled and shifted the images so that they would fit in the left-most part of the frame. The PC-rotated kernels and the original kernels are plotted below.
+
+##### Figure 5: Smoothed Class Kernels with (Right) and without (Left) PC Rotations
+
+```{r, echo=F, out.width=400, out.height=600}
+myimages<-c("../Algorithms/MLE1_Kernels.png","../Algorithms/MLE1_Kernels_Rotated.png")
+knitr::include_graphics(myimages)
+```
+
+If we compare the empirical kernels before and after rotating, we see rotated kernels are more recognizeable for some food classes, but less so for others--the asparagus has a defined stalk, the banana has a defined crescent shape, the carrot has pointy ends, the potato is an oval shape, the string bean is long and narrow, the peanuts are all standing up, and the watermelon has a crescent on one side. 
+
+In contrast, with pre-rotation, the kernels of other food classes become more indistinct or even look like other foods. The broccoli mass at the top of the frame disappears, the lollipop looks almost like a peanut, the mushroom looks like a doughnut, and the pineapple and strawberry lose their characteristic foliage at the top. 
+
+The rotation seems to benefit food classes that are long and symmetrical in their longest direction (bananas and string beans), muddle food classes that are long and assymmetrical in their longest direction (pineapple and lollipops), and have little effect on rounder objects (doughnuts and cookies). 
+
+Moving forward, we will likely only use the pre-rotated kernels for the food classes that look good: 
+string bean, potato, peanut, carrot, banana, asparagus, watermelon, hotdog.
+
+#### Determining Food Sub-Classes
+
+From earlier exploratory data analysis, it became clear that certain food classes might be drawn in qualitatively different ways. Pizzas and watermelons might be drawn as a slice or a whole pie. Bread might be a loaf or a square.
+
+One way we might think of separating each class into sub-classes is by a clustering approach. But what features might we use to cluster? We chose to do the clustering by measuring where each image hits the side of the 256 x 256 frame. We know that the images were preprocessed in such a way that each image hits both the top and left side of the frame as well as the bottom or the right sides. Whether and where the image hits each side of the frame might tell us what sub-class the image falls into.
 
 We can plot the multivariate distributions of the side-hit locations for each food class and visually scan for clustering patterns. We see the clustering patterns in watermelons, bananas, and peanuts below:
 
@@ -99,15 +131,6 @@ If we scan all of the scatter matricies, we can see a clustering pattern in:
 
 
 # 
-
-Another source of variation in the images that might make the kernels fuzzy is how the artist chose to orient their drawing. For some drawings, such as the apple, doodlers uniformly choose to place their apple upright. However, there was a lot of varaition in how artists chose to draw bananas.
-
-String Bean
-Potato
-Peanut
-Carrot
-Banana
-Asparagus
 
 ##### Figure ... 
 ```{r, echo=F, out.width=1200, out.height=1500}

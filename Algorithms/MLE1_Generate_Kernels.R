@@ -13,10 +13,11 @@ foods <- read_delim("food.txt", delim = "\n",col_names = F)[[1]]
 likelihoods <- expand.grid(x = 0:255, y = 0:255) %>% as.tibble
 
 for(i in foods){
-	load(file.path("summary_data", paste0(i, ".rdata")))
+	#load(file.path("summary_data", paste0(i, ".rdata")))
+	load(file.path("summary_rotated_data", paste0(i, ".rdata")))
 	
 	# convert y values to positives
-	df.sum <- df.sum %>% mutate(y = y+255)
+	#df.sum <- df.sum %>% mutate(y = y+255)
 	
 	# name data column after image type
 	names(df.sum)[3] <- i
@@ -38,4 +39,5 @@ for(i in foods){
 }
 
 names(likelihoods) <- gsub(" ","",names(likelihoods))
-save(likelihoods, file = file.path("Algorithms","Likelihoods_MLE1.rdata"))
+save(likelihoods, file = file.path("Algorithms","Rotated_Likelihoods_MLE1.rdata"))
+#save(likelihoods, file = file.path("Algorithms","Likelihoods_MLE1.rdata"))

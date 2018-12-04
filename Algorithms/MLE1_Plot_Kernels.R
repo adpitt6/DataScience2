@@ -1,5 +1,6 @@
 ### load kernels
-load(file = file.path("Algorithms","MLE1_Likelihoods.rdata"))
+#load(file = file.path("Algorithms","MLE1_Likelihoods.rdata"))
+load(file = file.path("Algorithms","Rotated_Likelihoods_MLE1.rdata"))
 library(reshape2)
 library(tidyverse)
 
@@ -7,19 +8,24 @@ library(tidyverse)
 likelihoods <- 
 	melt(likelihoods, id.vars = c("x","y"))
 
-png(filename = "Algorithms/MLE1_Kernels.png",
+png(filename = "Algorithms/MLE1_Kernels_Rotated.png",
     width = 1500, height = 1800)
+#png(filename = "Algorithms/MLE1_Kernels.png",
+#    width = 1500, height = 1800)
 ggplot(likelihoods, aes(x, y)) +
 	geom_raster(aes(fill = exp(value)))+
 	facet_wrap("variable", nrow = 6) + 
 	theme_void() +
 	theme(legend.position = "none",
-	      strip.text = element_text(size = 50)) 
+	      strip.text = element_text(size = 50)) +
+	scale_fill_continuous(high ="#66FF66")
 dev.off()
 
 ###########################################################
 ### Compare correlation of kernels
 library(spatstat) # "im" function 
+
+load(file = file.path("Algorithms","Rotated_Likelihoods_MLE1.rdata"))
 
 # correlation matrix
 cmat <- 
