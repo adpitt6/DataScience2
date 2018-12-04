@@ -4,9 +4,11 @@
 .Ruserdata
 binary_data
 binary_data_test
+cluster_data
 summary_data
 summary_rotated_data
 train_simplified
 plots
 QuickDraw.Rproj
 MLE1_Predictions
+MLE2_Predictions
