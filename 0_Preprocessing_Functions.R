@@ -85,18 +85,14 @@ integer.xy <- function(data) {
 }
 
 ###################################################################
-### FLIPPING FUNCTION 
-flip.y <- function(data) {
-	if(sum(data$y>127.5) > sum(data$y<127.5)){
-		return(data)
-	}else  data %>% mutate(y = 255 - y)
-}
-###################################################################
 ### ROTATION FUNCTIONS
 rotate.vert <- function(data) {
 	prcomp(data, center = TRUE)$x %>%
 	as_tibble %>%
 	transmute(x = PC2, y = PC1) %>%
 	scale.to.fit %>%
-	integer.xy
+	integer.xy %>%
+	mutate(flip = mean(abs(y - data$y)) > mean(abs(255-y - data$y)),
+	       y = (255-y) * flip + y*(1-flip)) %>%
+	select(-flip)
 }
