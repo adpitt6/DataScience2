@@ -1,0 +1,13 @@
+---
+title: "Model 1"
+author: "Lacey Etzkorn"
+date: "12/13/2018"
+output: html_document
+---
+
+As a first try at classifying images, we constructed a simple statistical model.
+
+Since each image consists of a small number of points that make up a path, 
+we could think about those points as being iid draws from a two-dimensional density
+determined by the food class.
+
