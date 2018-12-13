@@ -2,6 +2,10 @@
 library(tidyverse)
 library(spatstat)
 library(caret)
+library(reshape2)
+library(Hmisc)
+#install.packages("rpart")
+library("rpart")
 
 ###############################################################################
 ### Data Loading
@@ -50,7 +54,9 @@ head(tree.data)
 ### create wide format
 tree.data  <- tree.data %>% 
 	dcast(key_id + pred1 + pred2 + truth + height + width ~ lik.class,
-	      value.var = "lik.all")
+	      value.var = "lik.all") 
+
+tree.data <- tree.data %>% as.tibble
 head(tree.data)
 
 ###############################################################################
@@ -63,12 +69,36 @@ head(tree.data)
 	# blackboost, bstTree
 
 # use 10-fold cross-validation
-fitControl <- trainControl(method = "cv", number = 10)
+tree.data2 <-tree.data %>%
+	group_by(truth)%>%
+	sample_n(size = 50) %>%
+	mutate(isapple = ifelse(truth=="apple", "apple", "no")) %>%
+	ungroup %>%
+	select(-pred1, -pred2)
+dim(tree.data2)
 
-tree1 <- train(x = select(tree.data, -key_id, -truth),
-	     y = tree.data$truth,
-	     method = "rpart", 
-	     metric = "accuracy",
-	     trControl = firControl)
 
+
+
+#tree1 <- train(x = select(tree.data2, -key_id, -truth),
+	   y = factor(tree.data2$truth),
+	   method = "rpart", 
+	   metric = "accuracy",
+	   verbose = T,
+	   trControl = trainControl(method = "cv",number = 1))
+
+# try using rpart function
+tree1 <- rpart(data= select(tree.data2, -key_id, -truth),
+	   formula = isapple ~ .,
+	   method = "class", 
+	   parms = list(prior = c(29/30, 1/30)))
+
+par(mai=c(0,0,0,0) )
+plot(tree1,compress=T)
+text(tree1)
+table(tree.data2$pred2)
+
+
+
+png()
 
