@@ -7,3 +7,6 @@ navbar:
       href: index.html
     - text: "About Me"
       href: edaws.html
+output:
+  html_document:
+    theme: yeti
