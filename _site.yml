@@ -1,0 +1,9 @@
+name: "dsfinal-website"
+output_dir: "."
+navbar:
+  title: "Data Science Final Project"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About Me"
+      href: edaws.html
