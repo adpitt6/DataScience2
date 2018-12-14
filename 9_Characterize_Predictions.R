@@ -131,23 +131,23 @@ summarise(total.acc0 =  sum(pred1)/n()/1000,
 ### identify and plot bad predictions
 bad.apples <- 
 pred.data %>%
-filter(truth !=pred1) %>%
+filter(truth !=pred0) %>%
 group_by(truth) %>%
-sample_n(100) %>%
-select(-lik) %>%
+sample_n(1) %>%
+select(key_id, data, pred0) %>%
 unnest
 
-pdf(file = "Algorithms/Bad_Apples.pdf", width = 15, height = 15)
-for(i in unique(bad.apples$truth)){
+png(file = "Empirical_Kernel/Bad_Apples1.png", width = 1000, height = 1000)
 	print(
-	ggplot(subset(bad.apples, truth ==i)) +
-		geom_path(aes(x=x, y=y)) +
+	ggplot(bad.apples) +
+		geom_path(aes(x=x, y=255-y)) +
 		theme_void() +
-		geom_text(aes(x = 100, y = 100, label = pred1), col = "red") +
-		facet_wrap("key_id", nrow = 10) + 
-		ggtitle(paste("100 Bad Predictions for", i))
+		geom_text(aes(x = 255, y = 0, label = pred0), 
+		          col = "red", size = 6,
+		          hjust = 1, vjust = 0) +
+		facet_wrap("truth", nrow = 6) + 
+		theme(strip.text = element_text(size = 16, color = "#8bc34a"))
 	)
-}
 dev.off()
 
 ### look at clusters of mis-classifications

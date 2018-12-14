@@ -20,8 +20,22 @@ likelihoods <- likelihoods %>%
 	       variable = paste(capitalize(class),rotated),
 	       y = ifelse(rotated =="Rotated", y, 255-y))
 	
+### Plot without rotations
+png(filename = file.path("Empirical_Kernel","Kernels_NoRotations.png"),
+    width = 1800, height = 1800)
+print(
+	ggplot(likelihoods %>% filter(rotated =="Raw"), aes(x, y)) +
+		geom_raster(aes(fill = exp(value)))+
+		facet_wrap("variable", ncol  = 5) + 
+		theme_void() +
+		theme(legend.position = "none",
+		      strip.text = element_text(size = 25))+
+		scale_fill_continuous(low="white", high = "black")
+)
+dev.off()
 
-png(filename = file.path("Empirical_Kernel","Kernels.png"),
+### Plot with rotations
+png(filename = file.path("Empirical_Kernel","Kernels_withRotations.png"),
     width = 3400, height = 1800)
 print(
 ggplot(likelihoods, aes(x, y)) +
@@ -30,10 +44,11 @@ ggplot(likelihoods, aes(x, y)) +
 	theme_void() +
 	theme(legend.position = "none",
 	      strip.text = element_text(size = 25))+
-	scale_fill_continuous(low="black", high = "white")
+	scale_fill_continuous(low="white", high = "black")
 )
 dev.off()
 
+### Plot clustered kernels only
 png(filename = file.path("Empirical_Kernel","Clustered_Kernels.png"),
     width = 1800, height = 1800)
 print(

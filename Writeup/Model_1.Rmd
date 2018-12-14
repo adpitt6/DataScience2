@@ -27,11 +27,11 @@ Above we plot a single apple drawing on top of our smoothed density estimate for
 
 ## Model Results
 
-Using this approach, we labeled 1,000 imgaes from each food class and obtained the results below:
+Using this approach, we labeled 1,000 imgaes from each food class. Of the 30,000 images classified, 35.5% were classified correctly. With complete random guessing, we would expect to classify correctly only 1 in 30 images (3.3%)
 
 ##### Figure 2: Classification Matrix
 
-```{r}
+```{r, echo = FALSE}
 knitr::include_graphics("../Empirical_Kernel/Classifications1.png")
 ```
 
@@ -41,10 +41,19 @@ We also see patterns in the mis-classification--cakes and birthday cakes were of
 
 We see that certain labels (bread, watermelon, pizzas) seemed to be catch-alls for other foods. We asked whether our algorithm was just labeling MORE things as popsicles, pears, and bread.
 
-##### Class Positive Predictions and Sensitivity
+##### Figure 3: Class Positive Predictions and Sensitivity
 
-```{r}
+```{r, echo = FALSE}
 knitr::include_graphics("../Empirical_Kernel/Model1.png")
 ```
 
 While we were able to label ~80% of popsicles as popsicles, only about 40% of the things we labeled popsicles were popsicles. If we examine the classification matrix above, we see that many string beans and peanuts were also labeled as popsicles.
+
+We also plot a random sample of mis-classified doodles to get a sence of where we might be going wrong.
+
+##### Figure 4: A Sampler of Misclassified Foods
+```{r, echo = FALSE}
+knitr::include_graphics("../Empirical_Kernel/Bad_Apples1.png")
+```
+
+In the sample above, the true labels are given in green text while the classifications are given in red. From the sample above, we see that most of the misclassified images are recognizeable to the human eye, with the exception of the watermelon, sandwich, potato, popsicle, pizza, onion, bread, asparagus, and blackberry (9/30 images). 

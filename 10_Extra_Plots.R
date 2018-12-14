@@ -67,6 +67,7 @@ annotate("text", x = 100, y = 100,
          label = paste("ln(L) =", round(sum(df$apple), 1)), 
          color = "red", size = 10) +
 theme_void() + 
+theme(legend.position = "none")
 dev.off()
 
 
