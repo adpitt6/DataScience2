@@ -26,28 +26,7 @@ remove.prefix <- function(x) {
 	x <- gsub("rotated_","", x)
 }
 ### specify which kernels we want to use in model 5
-c("apple", "rotated_asparagus", "rotated_banana", "birthdaycake", "bread1", "bread2"               "bread3"               "bread4"              
-[17] "bread5"               "broccoli"             "cake"                 "carrot"              
-[21] "cookie"               "donut"                "grapes"               "hamburger"           
-[25] "hotdog"               "icecream"             "lollipop"             "mushroom"            
-[29] "onion"                "peanut"               "pear"                 "peas"                
-[33] "pineapple"            "pizza"                "pizza1"               "pizza2"              
-[37] "pizza3"               "pizza4"               "pizza5"               "popsicle"            
-[41] "potato"               "rotated_apple"        "rotated_asparagus"    "rotated_banana"      
-[45] "rotated_banana1"      "rotated_banana2"      "rotated_banana3"      "rotated_banana4"     
-[49] "rotated_banana5"      "rotated_birthdaycake" "rotated_blackberry"   "rotated_blueberry"   
-[53] "rotated_bread"        "rotated_bread1"       "rotated_bread2"       "rotated_bread3"      
-[57] "rotated_bread4"       "rotated_bread5"       "rotated_broccoli"     "rotated_cake"        
-[61] "rotated_carrot"       "rotated_cookie"       "rotated_donut"        "rotated_grapes"      
-[65] "rotated_hamburger"    "rotated_hotdog"       "rotated_icecream"     "rotated_lollipop"    
-[69] "rotated_mushroom"     "rotated_onion"        "rotated_peanut"       "rotated_pear"        
-[73] "rotated_peas"         "rotated_pineapple"    "rotated_pizza"        "rotated_pizza1"      
-[77] "rotated_pizza2"       "rotated_pizza3"       "rotated_pizza4"       "rotated_pizza5"      
-[81] "rotated_popsicle"     "rotated_potato"       "rotated_sandwich"     "rotated_strawberry"  
-[85] "rotated_stringbean"   "rotated_watermelon"   "rotated_watermelon1"  "rotated_watermelon2" 
-[89] "rotated_watermelon3"  "rotated_watermelon4"  "rotated_watermelon5"  "sandwich"            
-[93] "strawberry"           "stringbean"           "watermelon"           "watermelon1"         
-[97] "watermelon2"          "watermelon3"          "watermelon4"          "watermelon5"         
+kern.subset <- c("apple", "rotated_asparagus", "rotated_banana", "birthdaycake", "rotated_bread1", "rotated_bread4", "broccoli", "cake", "rotated_carrot", "cookie", "donut", "grapes", "hamburger", "hotdog", "icecream", "lollipop" , "mushroom", "onion", "rotated_peanut", "pear", "peas", "pineapple", "pizza1", "pizza3", "pizza4", "pizza5", "popsicle", "rotated_potato", "rotated_pizza1", "rotated_pizza2", "rotated_pizza3", "rotated_pizza4", "rotated_pizza5", "sandwich", "strawberry", "rotated_stringbean", "rotated_watermelon1", "rotated_watermelon2" , "rotated_watermelon3",  "rotated_watermelon4")    
 
 ### get predictions from all algorithms
 pred.data <- pred.data %>%
