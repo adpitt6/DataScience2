@@ -41,7 +41,7 @@ format.one.food <- function(food){
 		         	as.tibble())
 	       ) %>%
 	unnest(.id = "stroke") %>%
-	mutate(x = V1, y = V2 + 255) %>%
+	mutate(x = V1, y = 255-V2) %>%
 	select(key_id, stroke, x, y)
 	ids <- unique(df$key_id)
 	train <- filter(df,key_id %in% ids[1:5000])

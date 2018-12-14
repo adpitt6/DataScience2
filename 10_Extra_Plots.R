@@ -50,13 +50,39 @@ dev.off()
 
 load(file = "Empirical_Kernel/Kernels_MLE1.rdata")
 ### 
-likelihoods <- likelihoods %>% select(x,y,apple)
+likelihoods <- likelihoods %>% select(x,y,apple, broccoli)
 
+df <- filter(df, truth == "Apple") %>% left_join(likelihoods, by = c("x" ,"y"))
+
+png("Apple_AppleKernel_Plot.png", height =400, width = 400)
 ggplot() + 
 geom_raster(data = likelihoods, aes(x,255-y, fill = exp(apple))) +
-scale_fill_continuous(low = "white", high = "black")+
+scale_fill_continuous(low = "white", high = "black",
+	          limits = exp(c(-17.5, -9.75)))+
 geom_point(data = filter(df, truth == "Apple"),
            aes(x=x, y=255-y), color = "red") + 
 geom_path(data = filter(df, truth == "Apple"),
-          aes(x=x, y=255-y))+
-theme_void()
+          aes(x=x, y=255-y), color = "blue")+
+annotate("text", x = 100, y = 100, 
+         label = paste("ln(L) =", round(sum(df$apple), 1)), 
+         color = "red", size = 10) +
+theme_void() + 
+dev.off()
+
+
+png("Apple_BroccoliKernel_Plot.png", height =400, width = 400)
+ggplot() + 
+geom_raster(data = likelihoods, aes(x,255-y, fill = exp(broccoli))) +
+scale_fill_continuous(low = "white", high = "black",
+	          limits = exp(c(-17.5, -9.75)))+
+geom_point(data = filter(df, truth == "Apple"),
+           aes(x=x, y=255-y), color = "red") + 
+geom_path(data = filter(df, truth == "Apple"),
+          aes(x=x, y=255-y), color = "blue")+
+annotate("text", x = 100, y = 100, 
+	         label = paste("ln(L) =", round(sum(df$broccoli), 1)), 
+	         color = "red", size = 10) +
+theme_void()+ 
+theme(legend.position = "none")
+dev.off()
+

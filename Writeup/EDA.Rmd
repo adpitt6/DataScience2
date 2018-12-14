@@ -35,7 +35,7 @@ We create a kernel by smoothing over the empirical distribution of the points fo
 
 ##### Figure 3: Smoothed Class Kernels
 ```{r, echo=F, out.width=1200, out.height=1500}
-knitr::include_graphics("../Algorithms/MLE1_Kernels.png")
+#knitr::include_graphics("../Empirical_Kernel/MLE1_Kernels.png")
 ```
 
 We can still recognize some of the image classes from the kernels, however, for others we can't. We went back to the data and realized there might be a number of ways that each class can be drawn. Let's look at the watermelon, bananas, and peanuts. 
@@ -61,8 +61,8 @@ We chose to rotate the images using a principal components (PC) rotation. We sta
 ##### Figure 5: Smoothed Class Kernels with (Right) and without (Left) PC Rotations
 
 ```{r, echo=F, out.width=400, out.height=600}
-myimages<-c("../Algorithms/MLE1_Kernels.png","../Algorithms/MLE1_Kernels_Rotated.png")
-knitr::include_graphics(myimages)
+#myimages<-c("../Empirical_Kernel/MLE1_Kernels.png","../Empirical_Kernel/MLE1_Kernels_Rotated.png")
+#knitr::include_graphics(myimages)
 ```
 
 If we compare the empirical kernels before and after rotating, we see rotated kernels are more recognizeable for some food classes, but less so for others--the asparagus has a defined stalk, the banana has a defined crescent shape, the carrot has pointy ends, the potato is an oval shape, the string bean is long and narrow, the peanuts are all standing up, and the watermelon has a crescent on one side. 
@@ -134,11 +134,11 @@ If we scan all of the scatter matricies, we can see a clustering pattern in:
 
 ##### Figure ... 
 ```{r, echo=F, out.width=1200, out.height=1500}
-knitr::include_graphics("../Algorithms/Kernel_Correlation_Mat.png")
+knitr::include_graphics("../Empirical_Kernel/Kernel_Correlation_Mat.png")
 ```
 
 
 ##### Figure ... 
 ```{r, echo=F, out.width=1200, out.height=1500}
-knitr::include_graphics("../Algorithms/Kernel_Dendogram.png")
+knitr::include_graphics("../Empirical_Kernel/Kernel_Dendogram.png")
 ```

@@ -29,6 +29,8 @@ remove.prefix <- function(x) {
 ### get highest from either algorithm
 pred.data <- pred.data %>%
 	mutate(lik.all  = map2(lik, lik.rotated, ~ c(.x,.y) %>% sort(decreasing = T)),
+	       pred0 = map(lik, ~.[!grepl("[0-9]",names(.))] %>% sort(decreasing = T)),
+	       pred0 = map(pred0, ~names(.)[1]) %>% unlist,
 	       pred1 = remove.prefix(pred1),
 	       pred2 = remove.prefix(pred2),
 	       pred3 = map(lik.all, ~names(.)[1]) %>% unlist %>% remove.prefix)
@@ -37,17 +39,18 @@ pred.data <- pred.data %>%
 accuracy <- 
 pred.data %>%
 group_by(truth) %>%
-summarise(correct1 = sum(pred1==truth),
-          correct2 = sum(pred2==truth),
-          correct3 = sum(pred3==truth)) %>%
-arrange(desc(correct1)) 
+summarise(pred0 = sum(pred0==truth),
+          pred1 = sum(pred1==truth),
+          pred2 = sum(pred2==truth),
+          pred3 = sum(pred3==truth)) %>%
+arrange(desc(pred0)) 
 
 accuracy %>% print.data.frame()
 
 ### get false positives
 truepos <- 
 	pred.data %>%
-	select(truth, pred1, pred2, pred3) %>%
+	select(truth, pred0, pred1, pred2, pred3) %>%
 	melt(id.vars = "truth") %>%
 	group_by(value, variable) %>%
 	summarise(truepos = mean(value==truth)) %>%
@@ -55,6 +58,22 @@ truepos <-
 	arrange(pred1)
 
 truepos
+
+both <- left_join(
+	melt(truepos, id.vars = "value", value.name = "pos"),
+	melt(accuracy, id.vars = "truth", value.name = "acc"),
+	by = c("value"="truth", "variable"))
+
+png("Empirical_Kernel/Model1.png", height = 400, width = 400)
+ggplot(both %>% filter(variable == "pred0")) + 
+geom_point(aes(x = pos, y = acc/1000)) +
+geom_text(aes(x = pos, y = acc/1000, label = value),
+          vjust = 1) +
+xlab("Class Positive Predictive Value")+
+ylab("Class Sensitivity") +
+xlim(0,.55) + ylim(0,.85) + 
+theme_bw()
+dev.off()
 
 ### Plot # correct predictions by class
 png("Empirical_Kernel/Correct_Classifications.png", height = 1000, width = 500)
@@ -74,12 +93,12 @@ dev.off()
 # filter(accuracy, n.mode1 > correct) 
 
 # prediction matrix
-pred.mat <- pred.data %>% with(table(truth, pred1))
+pred.mat <- pred.data %>% with(table(truth, pred0))
 ord <- order(diag(pred.mat),decreasing = T)
 pred.mat <- pred.mat[ord,][,ord]
 im(pred.mat) %>% plot
 
-png("Empirical_Kernel/Classifications1.png", height = 1100, width = 1100)
+png("Empirical_Kernel/Classifications0.png", height = 1100, width = 1100)
 {
 	par(mar = c(7, 8, 1, 1) + 0.1,
 	    ps = 20, cex = 1, cex.main = 2)
@@ -104,9 +123,10 @@ save(truepos, file = file.path("Empirical_Kernel","True_Pos.rdata"))
 ### overall accuracy
 #accuracy %>% summarise(total.acc =  sum(correct)/n()/1000)
 accuracy %>%
-summarise(total.acc1 =  sum(correct1)/n()/1000,
-          total.acc2 =  sum(correct2)/n()/1000,
-          total.acc3 =  sum(correct3)/n()/1000)
+summarise(total.acc0 =  sum(pred1)/n()/1000,
+          total.acc1 =  sum(pred1)/n()/1000,
+          total.acc2 =  sum(pred2)/n()/1000,
+          total.acc3 =  sum(pred3)/n()/1000)
 
 ### identify and plot bad predictions
 bad.apples <- 
