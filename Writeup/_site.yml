@@ -5,8 +5,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "About Me"
-      href: edaws.html
+    - text: "Exploratory Data Analysis"
+      href: EDA.html
+    - text: "Method 1"
+      href: Model_1.html
 output:
   html_document:
     theme: yeti

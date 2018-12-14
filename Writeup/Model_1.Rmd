@@ -2,7 +2,8 @@
 title: "Model 1"
 author: "Lacey Etzkorn"
 date: "12/13/2018"
-output: html_document
+output:
+  html_document: default
 ---
 
 ## Basic Idea
@@ -17,7 +18,7 @@ We give an example of this procedure below.
 
 ##### Figure 1: Apple Drawing Overlayed on the Apple and Broccoli Density Estimates
 ```{r, echo = FALSE, fig.height=3, fig.width=3}
-myimages <- c("../Apple_AppleKernel_Plot.png", "../Apple_BroccoliKernel_Plot.png")
+myimages <- c("../Empirical_Kernel/Apple_AppleKernel_Plot.png", "../Empirical_Kernel/Apple_BroccoliKernel_Plot.png")
 knitr::include_graphics(myimages)
 ```
 
