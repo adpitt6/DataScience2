@@ -7,9 +7,7 @@ output: html_document
 
 ## Basic Idea
 
-As a first try at classifying images, we constructed a simple statistical model.
-
-Since each image consists of a small number of points that make up a path, 
+As a first try at classifying images, we constructed a simple statistical model. Since each image consists of a small number of points that make up a path, 
 we could think about those points as being iid draws from a two-dimensional density
 determined by the food class.
 
@@ -56,4 +54,30 @@ We also plot a random sample of mis-classified doodles to get a sence of where w
 knitr::include_graphics("../Empirical_Kernel/Bad_Apples1.png")
 ```
 
-In the sample above, the true labels are given in green text while the classifications are given in red. From the sample above, we see that most of the misclassified images are recognizeable to the human eye, with the exception of the watermelon, sandwich, potato, popsicle, pizza, onion, bread, asparagus, and blackberry (9/30 images). 
+In the sample above, the true labels are given in green text while the classifications are given in red. From the sample above, we see that most of the misclassified images are recognizeable to the human eye, with the exception of the watermelon, sandwich, potato, popsicle, pizza, onion, bread, asparagus, and blackberry (9/30 images).
+
+## Extending the Model
+
+Our exploratory data analysis demonstrated a high degree of rotational variability in some food classes, such as the banana, asparagus, carrot, string bean, potato, and peanut. Other food classes seemed to be made up of multiple food sub-classes (pizza and watermelon). Hence, incorporating  rotatinal variability and sub-classes into our model might improve our predictions.
+
+We consider comparing the following prediction pipelines:
+
+1. **The original model** (as demonstrated above). 
+We compare the un-transformed image to the raw kernels.
+
+2. **The rotation model.** We compare the PCA-rotated image (described in the EDA) to the Pre-rotated kernels.
+
+3. **The rotation model with clusters.** 
+We take whichever label from class one or two that produced a higher log likelihood.
+
+4. **The combined model.** We take whichever label from class one or two that produced a higher log likelihood.
+
+
+
+## Discussion and Take-Aways
+
+Our model was very quick to construct, and predicting new images was very quick. We believe the reason for this was largely due to the fact that we kept the data in it's small form. 
+
+For most traditional image processing and classification, the images need to be in a raster format. For an image on a 256 x 256 grid the computer has to store 65,536 numbers for each image. However, we retained the data format provided by google, which stores the images as roughly 50 ordered (x,y) pairs. Hence, we could could easily work with 5,000 images from 30 classes (only 1.5 million numbers) all at once. 
+
+While 
