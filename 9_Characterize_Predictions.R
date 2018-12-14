@@ -38,7 +38,8 @@ pred.data <- pred.data %>%
 	       lik1 = map(pred1, ~.[1]) %>% unlist,
 	       pred1 = map(pred1, ~names(.)[1]) %>% unlist %>% remove.prefix,
 	       pred2 = ifelse(lik0 > lik1, pred0, pred1),
-	       pred3 = map(lik.all, ~names(.)[1]) %>% unlist %>% remove.prefix)
+	       pred3 = map(lik.all, ~names(.)[1]) %>% unlist %>% remove.prefix,
+	       pred4 = map(lik.all, ~.))
 
 pred.data <- pred.data %>%
 select(key_id, truth, pred0, pred1, pred2, pred3, lik0, lik1, lik, lik.rotated, lik.all, data, data.rotated)
