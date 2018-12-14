@@ -2,7 +2,8 @@
 title: "Model 1"
 author: "Lacey Etzkorn"
 date: "12/13/2018"
-output: html_document
+output:
+  html_document: default
 ---
 
 ## Basic Idea
