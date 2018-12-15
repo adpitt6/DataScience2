@@ -90,6 +90,7 @@ both <- left_join(
 # Plots
 ####################################################################
 
+### ACCURACY by POSITIVE PREDICTIVE VALUE
 png("Empirical_Kernel/Model1.png", height = 400, width = 400)
 	ggplot(both %>% filter(variable == "pred0")) + 
 	geom_point(aes(x = pos, y = acc/1000)) +
@@ -101,18 +102,19 @@ png("Empirical_Kernel/Model1.png", height = 400, width = 400)
 	theme_bw()
 dev.off()
 
-### Plot # correct predictions by class
+### ACCURACY
 accuracy <- accuracy %>% arrange(truth)
-
 png("Empirical_Kernel/Correct_Classifications.png", height = 1000, width = 500)
 {
 	par(mar = c(1, 10, 5, 2) + 0.1,
 	    ps = 20, cex = 1, cex.main = 1)
-	plot(im(select(accuracy, correct1:correct3) %>% as.matrix),
+	plot(im(select(accuracy, pred0:pred4) %>% as.matrix),
 	     main = "")
 	title("No. Correct Classifications (n = 1000)", line = 0)
 	text(par("usr")[1] , 1:30, adj = 1,
 	     labels = accuracy$truth, cex = 1, xpd = TRUE)
+	text(1:5, par("usr")[1] , adj = 1,
+	     labels = paste(1:5), cex = 1, xpd = TRUE)
 }
 dev.off()
 

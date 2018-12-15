@@ -76,11 +76,29 @@ For each food class, we pick the kernel which we think best represents the data 
 
 We were surprised that our predictions did not get any better by considering  rotations,  clustering, or human selection of rotated vs. raw vs. cluster-derived kernels. 
 
-```{r}
+
+##### Table 1: Model Accuracy
+```{r, echo = FALSE}
 x <- data.frame(Model = 1:5, Accuracy = c(0.35, 0.19, 0.32, 0.32, 0.27))
 knitr::kable(x, format = "html")
 ```
 
+The table above gives the accuracy for the five models. Rotating all of the images for prediction and kernel estimation reduced the overall accuracy dramatically to only 19%. 
+
+##### Figure 5: Accuracy by Model and Class
+```{r, echo = FALSE, fig.width=2}
+knitr::include_graphics("../Empirical_Kernel/Correct_Classifications.png")
+```
+
+Using Figure 5, we can examine the class-specific accuracy of our 5 models. We see that the rotation fufilled its purposes for the food classes that needed it. In our exploratory data analysis, we saw that the kernels for peanuts, potatos, and string beans became much clearer when we rotated the data. Here, we see the accuracy of model 2 is better than model 1 for those classes. Additionally, we see that the accuracy for watermelon, pizza, bananas, and bread improves when we include the cluster-derived kernels in model 4. However, these improvements all seem to come at a cost--the predictions for the other classes fall.
+
+##### Figure 6: Comparing Model 1 vs 5
+
+```{r, echo = FALSE, fig.height=3, fig.width=3}
+myimages <- c("../Empirical_Kernel/Classifications0.png",
+	  "../Empirical_Kernel/Classifications4.png")
+knitr::include_graphics(myimages)
+```
 
 ## Discussion and Take-Aways
 
