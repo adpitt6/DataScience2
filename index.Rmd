@@ -1,5 +1,5 @@
 
-```{r echo = FALSE, message=FALSE}
+```{r echo = FALSE, message=FALSE, fig.align='center'}
 knitr::include_graphics("QuickDrawPic.png")
 ```
 
@@ -20,7 +20,7 @@ Google has released some of the doodle data, and has opened up a Kaggle competit
 
 **How do you draw yoga?**
 
-```{r echo = FALSE, message=FALSE}
+```{r echo = FALSE, message=FALSE, fig.align='center'}
 knitr::include_graphics("YogaDraw.png")
 ```
 
