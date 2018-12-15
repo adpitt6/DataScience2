@@ -295,13 +295,13 @@ div.tocify {
 <p>The first task we had was to plot a lot of drawings all at once. Looking at drawings individually would have been very time consuming. We chose to overlay 500 drawings on top of one another of each type to get a sense of the variability of shapes for each drawing. Here are the plots for apples, mushrooms, and bread:</p>
 <div id="figure-1-500-drawings-of-apples-mushrooms-and-bread" class="section level5">
 <h5>Figure 1: 500 Drawings of Apples, Mushrooms, and Bread</h5>
-<p><img src="plots/Apple2.png" /> <img src="plots/Mushroom2.png" /> <img src="plots/Bread2.png" /></p>
+<p><img src="plots/Apple2.png" style="width:32.0%" /> <img src="plots/Mushroom2.png" style="width:32.0%" /> <img src="plots/Bread2.png" style="width:32.0%" /></p>
 <p>Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.</p>
 <p>We asked the question: what if we didn’t connect the lines for each drawing? Since each drawing consists of a number of points connected in a path, we could just ignore how the points are connected and focus on the location of the points.</p>
 </div>
 <div id="figure-2-500-densities-of-apples-mushrooms-and-bread" class="section level5">
 <h5>Figure 2: 500 Densities of Apples, Mushrooms, and Bread</h5>
-<p><img src="plots/Apple.png" width="300" height="300" /><img src="plots/Mushroom.png" width="300" height="300" /><img src="plots/Bread.png" width="300" height="300" /></p>
+<p><img src="plots/Apple.png" style="width:32.0%" /> <img src="plots/Mushroom.png" style="width:32.0%" /> <img src="plots/Bread.png" style="width:32.0%" /></p>
 <p>The images certainly become more difficult to recognize, but there is still a barely recognizeable shape there. Then we smooth these images for each of the classes using kernel density smoothing.</p>
 </div>
 <div id="figure-3-smoothed-class-kernels" class="section level5">
@@ -311,7 +311,7 @@ div.tocify {
 </div>
 <div id="figure-4-500-drawings-of-watermelons-bananas-and-peanuts" class="section level5">
 <h5>Figure 4: 500 Drawings of Watermelons, Bananas, and Peanuts</h5>
-<p><img src="plots/Watermelon2.png" width="300" height="300" /><img src="plots/Banana2.png" width="300" height="300" /><img src="plots/Peanut2.png" width="300" height="300" /></p>
+<p><img src="plots/Watermelon2.png" style="width:32.0%" /> <img src="plots/Banana2.png" style="width:32.0%" /> <img src="plots/Peanut2.png" style="width:32.0%" /></p>
 <p>People tended to draw two types of peanuts: a sideways peanut or a vertical peanut. Additionally, some people drew a half slice of watermelon while others drew a whole watermelon. If we look very carefully, we can see that people draw bananas in many orientations.</p>
 <p>For the watermelons, we can think of the variations as sub-classes. If we can somehow separate the watermelon class of drawings into sub-classes (whole, half, wedge), and estimate a kernel for each subclass separately, our prediction algorithm might improve. For bananas and peanuts, we can think of the variations in drawings being due to rotation. If we can find a way to rotate training and test data prior to kernel estimation and prediction (respectively), our algorithm may also improve.</p>
 </div>

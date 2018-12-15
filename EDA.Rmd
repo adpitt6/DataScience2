@@ -18,19 +18,15 @@ The first task we had was to plot a lot of drawings all at once. Looking at draw
 
 ##### Figure 1: 500 Drawings of Apples, Mushrooms, and Bread
 
-![](plots/Apple2.png)
-![](plots/Mushroom2.png)
-![](plots/Bread2.png)
+![](plots/Apple2.png){width=32%} ![](plots/Mushroom2.png){width=32%} ![](plots/Bread2.png){width=32%}
 
 Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.
 
 We asked the question: what if we didn't connect the lines for each drawing? Since each drawing consists of a number of points connected in a path, we could just ignore how the points are connected and focus on the location of the points.
 
 ##### Figure 2: 500 Densities of Apples, Mushrooms, and Bread
-```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("plots/Apple.png","plots/Mushroom.png","plots/Bread.png")
-knitr::include_graphics(myimages)
-```
+![](plots/Apple.png){width=32%} ![](plots/Mushroom.png){width=32%} ![](plots/Bread.png){width=32%}
+
 
 The images certainly become more difficult to recognize, but there is still a barely recognizeable shape there. Then we smooth these images for each of the classes using kernel density smoothing.  
 
@@ -42,10 +38,9 @@ knitr::include_graphics("Empirical_Kernel/Kernels_NoRotations.png")
 We can still recognize some of the image classes from the kernels (pears, donuts, etc.). However, some kernels are unrecognizeable. We went back to the data and realized there might be a number of ways that each class can be drawn. Let's examine the watermelon, bananas, and peanuts. 
 
 ##### Figure 4: 500 Drawings of Watermelons, Bananas, and Peanuts
-```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("plots/Watermelon2.png","plots/Banana2.png","plots/Peanut2.png")
-knitr::include_graphics(myimages)
-```
+![](plots/Watermelon2.png){width=32%} ![](plots/Banana2.png){width=32%} ![](plots/Peanut2.png){width=32%}
+
+
 
 People tended to draw two types of peanuts: a sideways peanut or a vertical peanut. Additionally, some people drew a half slice of watermelon while others drew a whole watermelon. If we look very carefully, we can see that people draw bananas in many orientations. 
 
