@@ -456,7 +456,7 @@ div.tocify {
 <p>The MLE classifier keeps the original resolution, but uses only the points that define the segments.</p>
 <p><em>OurCNN</em> uses those points and points between them, but reduces resolution to 32-by-32.</p>
 <p>Here are the three data versions for a watermelon, a sandwich, and a pear.</p>
-<p><img src="TrangPlots/data_reduction_watermelon.png" width="70%" style="display: block; margin: auto;" /><img src="TrangPlots/data_reduction_sandwich.png" width="70%" style="display: block; margin: auto;" /><img src="TrangPlots/data_reduction_pear.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/data_reduction_watermelon.png" width="70%" style="display: block; margin: auto;" /><img src="docs/TrangPlots/data_reduction_sandwich.png" width="70%" style="display: block; margin: auto;" /><img src="docs/TrangPlots/data_reduction_pear.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Hmm, it is now clear that we trained the MLE classifier using less data than we did <em>OurCNN</em>.</p>
 <p>Other data that neither classifiers use: time, country of origin, and also stroke sequence (relevant in a fascinating analysis of <a href="https://qz.com/994486/the-way-you-draw-circles-says-a-lot-about-you/">how people draw circles</a>).</p>
 </div>
@@ -465,7 +465,7 @@ div.tocify {
 <p>the MLE classifier was trained on a random sample of images of each type, regardless of whether Google AI recognized what type it is.</p>
 <p><em>OurCNN</em> was trained on a random sample of images recognized by Google AI.</p>
 <p>Here are two examples of Google-recognized and Google-unrecognized images.</p>
-<p><img src="TrangPlots/rec_unrec_broccoli.png" width="70%" style="display: block; margin: auto;" /><img src="TrangPlots/rec_unrec_blackberry.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/rec_unrec_broccoli.png" width="70%" style="display: block; margin: auto;" /><img src="docs/TrangPlots/rec_unrec_blackberry.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -475,36 +475,36 @@ div.tocify {
 <div id="relative-to-google-ai" class="section level2">
 <h2>Relative to Google AI</h2>
 <p>We are, of course, curious to see how <em>OurCNN</em> performs compared to Google AI on each of these edibles. We took a random sample of 1000 images of each edible (regardless of whether they are recognized by Google AI or not) and put them through <em>OurCNN</em>. Below is how <em>OurCNN</em> performs on these images, compared to Google AI recognition rates based on the whole <a href="https://www.kaggle.com/c/quickdraw-doodle-recognition/data">dataset</a> available to us.</p>
-<p><img src="TrangPlots/cnn_vs_google.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/cnn_vs_google.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Hah, <em>OurCNN</em> is outperformed on ALL the edibles.</p>
 <p>It is amazing that on those that <em>OurCNN</em> really struggles to differentiate, Google AI has recognition rates of 8x-9x percent! And this is even more awesome (for Google!) when you remind yourself that Google AI has to differentiate among 340 different things. <em>OurCNN</em> has the much simpler job of differentiating only 31 of those things (sorry, we don’t care much about non-edibles).</p>
 </div>
 <div id="on-google-recognized-images" class="section level2">
 <h2>On Google-recognized images</h2>
 <p>As <em>OurCNN</em> was trained on images whose category, it is appropriate to first look at how it performs on a random test set of Google-recognized images (again, 1000 images per edible). This performance is shown in the classification probability matrix below, where the edibles are sorted by classification accuracy.</p>
-<p><img src="TrangPlots/recognized_ordered.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/recognized_ordered.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><em>OurCNN</em> does better for some edibles and worse for others. Like we saw before when building the MLE classifier, cakes and birthday cakes are often confused. And from the perspective of <em>OurCNN</em>, some blackberries look like grapes.</p>
 <p>Let’s now zoom into the images that are misclassified and rearrange them a bit, so that we see what each edible tends to be misclassified as.</p>
-<p><img src="TrangPlots/wrong_recognized_reordered.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/wrong_recognized_reordered.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>It looks like most of the confusion of <em>OurCNN</em> happen in pairs of edibles. Clearly, cake and birthday cake are a pair. Cakes are generally not cake-like enough because they look more like birthdday cakes, and birthday cakes are generally not birthday-y enough because they look more like cakes.</p>
 <p>Other pairs are popsicle-lollipop, mushroom-broccoli, strawberry-pineapple, potato-cookie, pear-apple, string bean-banana, etc.</p>
 <p>Some edibles are involves in more than one pair. Grapes is in a primary pair with blackberry, and in a secondary pair with peas. String been is paired with both banana and asparagus. Apple is paired with both blackberry and pear.</p>
 <p>There are some one-way relationships. Cookie is the object of classification for bad pizza but much less the opposite. Steak is an object of classification for donut, but not the other way around. Quite a few bad pears look like peanuts, but few bad peanuts look like pears.</p>
 <p>Let’s look at several of the pairs.</p>
-<p><img src="TrangPlots/eight_pairs.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/eight_pairs.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Interesting! Some of them, we can kind of see why. Some of them, not.</p>
 </div>
 <div id="on-google-unrecognized-images" class="section level2">
 <h2>On Google-unrecognized images</h2>
 <p>We now subject <em>OurCNN</em> to a random set of Google-unrecognized images.</p>
-<p><img src="TrangPlots/unrecognized_ordered.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/unrecognized_ordered.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>At the highest, <em>OurCNN</em> correctly classifies 38% of the pizza images in this set. At the lowest, 6.8% of the pear images. Contrast this with the probability of 0.032 when tossing a 31-sided coin.</p>
 <p>It is interesting that there seem to be some favorites among the labels (blackberry and peas) for classifying any random category. Do bad drawings tend to have certain types of strokes that are commonly present in blackberry and/or peas drawings? Let’s look at some of these non-blackberries that are classified as blackberries (below, left) next to some good (Google-recognized) blackberries that <em>OurCNN</em> also classified as blackberries (below, right).</p>
 <p><img src="other_as_blackberry.png" style="width:49.0%" /> <img src="blackberry_as_blackberry.png" style="width:49.0%" /></p>
 <p>Perhaps the one thing in common between these two sets of images is that there are a lot of busy pixels!</p>
 <p>Wait! Isn’t it super cool that <em>OurCNN</em> includes Blackberry the hand-held device?</p>
 <p>To be complete, let’s also look at the classification probabilities of Google-unrecognized images that are misclassified by <em>OurCNN</em>.</p>
-<p><img src="TrangPlots/wrong_unrecognized_reordered.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="docs/TrangPlots/wrong_unrecognized_reordered.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>We do not see anything additional here that was not noticed before.</p>
 <!-- the overall Google-recognized rate for an equal-weight mixture of these 31 edibles is 93.2%. -->
 </div>

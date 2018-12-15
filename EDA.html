@@ -404,12 +404,12 @@ div.tocify {
 </div>
 <div id="figure-3-smoothed-class-kernels" class="section level5">
 <h5>Figure 3: Smoothed Class Kernels</h5>
-<p><img src="../Empirical_Kernel/Kernels_NoRotations.png" width="1200" height="1500" /></p>
+<p><img src="Empirical_Kernel/Kernels_NoRotations.png" width="1200" height="1500" /></p>
 <p>We can still recognize some of the image classes from the kernels (pears, donuts, etc.). However, some kernels are unrecognizeable. We went back to the data and realized there might be a number of ways that each class can be drawn. Let’s examine the watermelon, bananas, and peanuts.</p>
 </div>
 <div id="figure-4-500-drawings-of-watermelons-bananas-and-peanuts" class="section level5">
 <h5>Figure 4: 500 Drawings of Watermelons, Bananas, and Peanuts</h5>
-<p><img src="../plots/Watermelon2.png" width="300" height="300" /><img src="../plots/Banana2.png" width="300" height="300" /><img src="../plots/Peanut2.png" width="300" height="300" /></p>
+<p><img src="plots/Watermelon2.png" width="300" height="300" /><img src="plots/Banana2.png" width="300" height="300" /><img src="plots/Peanut2.png" width="300" height="300" /></p>
 <p>People tended to draw two types of peanuts: a sideways peanut or a vertical peanut. Additionally, some people drew a half slice of watermelon while others drew a whole watermelon. If we look very carefully, we can see that people draw bananas in many orientations.</p>
 <p>For the watermelons, we can think of the variations as sub-classes. If we can somehow separate the watermelon class of drawings into sub-classes (whole, half, wedge), and estimate a kernel for each subclass separately, our prediction algorithm might improve. For bananas and peanuts, we can think of the variations in drawings being due to rotation. If we can find a way to rotate training and test data prior to kernel estimation and prediction (respectively), our algorithm may also improve.</p>
 </div>
@@ -420,7 +420,7 @@ div.tocify {
 <p>We chose to rotate the images using a principal components (PC) rotation. We standardized the images so that the longest dimension of the image would go in the vertical direction. We then rescaled and shifted the images so that they would fit in the left-most part of the frame. The PC-rotated kernels and the original kernels are plotted below.</p>
 <div id="figure-5-smoothed-class-kernels-with-and-without-pc-rotations" class="section level5">
 <h5>Figure 5: Smoothed Class Kernels with and without PC Rotations</h5>
-<p><img src="../Empirical_Kernel/Kernels_withRotations.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Kernels_withRotations.png" width="1700" /></p>
 <p>If we compare the empirical kernels before and after rotating, we see rotated kernels are more recognizeable for some food classes, but less so for others–the asparagus has a defined stalk, the banana has a defined crescent shape, the carrot has pointy ends, the potato is an oval shape, the string bean is long and narrow, the peanuts are all standing up, and the watermelon has a crescent on one side.</p>
 <p>In contrast, with pre-rotation, the kernels of other food classes become more indistinct or even look like other foods. The broccoli foliage at the top of the frame disappears the mushroom looks like a doughnut, and the pineapple and strawberry lose their characteristic foliage at the top.</p>
 <p>The rotation seems to benefit food classes that are long and symmetrical in their longest direction (bananas and string beans), muddle food classes that are long and assymmetrical in their longest direction (pineapple and lollipops), and have little effect on rounder objects (doughnuts and cookies).</p>
@@ -434,18 +434,18 @@ div.tocify {
 <p>We can plot the multivariate distributions of the side-hit locations for each food class and visually scan for clustering patterns. We see the clustering patterns in watermelons, bananas, and peanuts below:</p>
 <div id="figure-6-side-hit-patterns-for-watermelons-left-bananas-center-and-peanuts-right" class="section level5">
 <h5>Figure 6: Side-Hit Patterns for Watermelons (left), Bananas (center), and Peanuts (right)</h5>
-<p><img src="../plots/watermelon_cluster.png" width="300" height="300" /><img src="../plots/banana_cluster.png" width="300" height="300" /><img src="../plots/peanut_cluster.png" width="300" height="300" /></p>
+<p><img src="plots/watermelon_cluster.png" width="300" height="300" /><img src="plots/banana_cluster.png" width="300" height="300" /><img src="plots/peanut_cluster.png" width="300" height="300" /></p>
 <p>If we look at the 500 watermelon sketches, we see that the half-circle watermelons tend to hit the right and left sides of the image at the very top, and they also tend not to hit the bottom of the image. On the other hand, the round watermelons tend to hit every side directly in the center. Hence, we see a clustering pattern in the distribution of where the watermelon images hit the side of the frame.</p>
 </div>
 <div id="figure-7-side-hit-patterns-for-apples-left-mushroom-center-and-bread-right" class="section level5">
 <h5>Figure 7: Side-Hit Patterns for Apples (left), Mushroom (center), and Bread (right)</h5>
-<p><img src="../plots/apple_cluster.png" width="300" height="300" /><img src="../plots/mushroom_cluster.png" width="300" height="300" /><img src="../plots/bread_cluster.png" width="300" height="300" /></p>
+<p><img src="plots/apple_cluster.png" width="300" height="300" /><img src="plots/mushroom_cluster.png" width="300" height="300" /><img src="plots/bread_cluster.png" width="300" height="300" /></p>
 <p>In contrast, there is no obvious clustering structure in the side-hit patterns for some of the food-classes with a recognizable empirical kernel. We see above that apples tend to hit every side in the middle. For mushrooms, it seems that where the mushroom hits the left side of the frame is correlated with where the mushroom hits the right side of the frame.</p>
 <p>We move forward by beforming k-means clustering on the six measurements given in the plots above for each image class. We chose to search for <span class="math inline">\(k=5\)</span> clusters since the pairswise plots above indicated a maximum of 5 clusters per class. For each cluster we then created a sketch plot to see if there were qualitative differences in the sketches captured by each cluster. Let’s plot the clusters for some of the food classes.</p>
 </div>
 <div id="figure-8-sketch-plots-of-food-class-clusters-pizza-watermelon-bread" class="section level5">
 <h5>Figure 8: Sketch Plots of Food Class Clusters (Pizza, Watermelon, Bread)</h5>
-<p><img src="../Cluster_Plots/pizza_rotated.png" width="300" height="300" /><img src="../Cluster_Plots/watermelon_rotated.png" width="300" height="300" /><img src="../Cluster_Plots/bread_rotated.png" width="300" height="300" /></p>
+<p><img src="Cluster_Plots/pizza_rotated.png" width="300" height="300" /><img src="Cluster_Plots/watermelon_rotated.png" width="300" height="300" /><img src="Cluster_Plots/bread_rotated.png" width="300" height="300" /></p>
 <p>From the above sketch plots, we see that we have fairly effectively separated pizza and watermelon slices from the whole versions. Even though we saw 5 clusters in the pair plots above for watermelon, there are really only two types of watermelon.</p>
 </div>
 </div>
@@ -454,12 +454,12 @@ div.tocify {
 <p>For the sake of “exploratory” data analysis, we also explored which foods looked the most alike, according to our empirical kernels. We examined the point-wise correlation between the empirical kernels for each food class and performed a heirarchical clustering to obtain the following dendogram.</p>
 <div id="figure-9-food-class-kernels-clustered-by-correlation" class="section level5">
 <h5>Figure 9: Food Class Kernels Clustered by Correlation</h5>
-<p><img src="../Empirical_Kernel/Kernel_Dendogram.png" width="1200" height="1500" /></p>
+<p><img src="Empirical_Kernel/Kernel_Dendogram.png" width="1200" height="1500" /></p>
 <p>We see some close relationships between the kernels that make a lot of sense: Hamburgers and sandiwches; cakes and birthday cakes; broccoli and mushrooms; stringbeans, asparagus, and carrots; apples and pears. Ice creams, typically represented as cones, have the same pointy bottoms as strawberries. Blackberries and grapes are both typically represented as a cluster of circles.</p>
 </div>
 <div id="figure-10-correlation-matrix-for-food-class-kernels" class="section level5">
 <h5>Figure 10: Correlation Matrix for Food Class Kernels</h5>
-<p><img src="../Empirical_Kernel/Kernel_Correlation_Mat.png" width="1200" height="1500" /></p>
+<p><img src="Empirical_Kernel/Kernel_Correlation_Mat.png" width="1200" height="1500" /></p>
 </div>
 </div>
 
