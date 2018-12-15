@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Lacey Etzkorn, Trang Nguyen, Adam Pittman" />
 
 
-<title></title>
+<title>Project Details</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -302,26 +303,49 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">Project Details</h1>
+<h4 class="author"><em>Lacey Etzkorn, Trang Nguyen, Adam Pittman</em></h4>
 
 </div>
 
 
-<p><img src="QuickDrawPic.png" width="400" /></p>
-<div id="quick-draw" class="section level2">
-<h2>Quick, Draw!</h2>
-<p><strong>Are your drawing skills good enough to be recognized by google?</strong></p>
-<p><strong>Are we good enough to build a program to recognize your drawings?</strong></p>
+<div id="motivation-and-overview" class="section level2">
+<h2>Motivation and Overview:</h2>
+<p><strong>Provide an overview of the project goals and the motivation for it. Consider that this will be read by people who did not see your project proposal.</strong></p>
 <p>Google’s internet game QuickDraw prompts players to draw a given object. Such objects include an apple, a kangaroo, or the Eiffel Tower. You can play the game here: <a href="https://quickdraw.withgoogle.com" class="uri">https://quickdraw.withgoogle.com</a>. As the player draws the object, Google attempts to guess what the user is drawing. In fact, Google uses user-supplied doodles to train an object recognition algorithm. Google has released some of the doodle data, and has opened up a Kaggle competition for teams to submit their own algorithms. The goal of competing teams is to produce an algorithm that classifies doodles in a test set.</p>
-<p><strong>How do you draw yoga?</strong></p>
-<p><img src="YogaDraw.png" width="960" /></p>
-<p>As you can see, google recognized your image by comparing it to others of similar nature. This is what we tried to replicate! Some of the drawings can be really abstract, like animal migration.</p>
-<p>If you want to try also, download the data from <a href="https://www.kaggle.com/c/quickdraw-doodle-recognition/data">here</a>. The files can be quite large so we recommend using the simplified version unless you have access to cloud storage</p>
-<p>We built an algorithm to classify each food image. Yum!</p>
-<div id="figure-1-a-doodle-from-each-food-class" class="section level5">
-<h5>Figure 1: A Doodle from each Food Class</h5>
-<p><img src="Sketch_30_Foods.png" width="500" /></p>
-<p>After data exploration, hopefully you see how “creative” some people can be. (cover your eyes)</p>
 </div>
+<div id="related-work" class="section level2">
+<h2>Related Work:</h2>
+<p><strong>Anything that inspired you, such as a paper, a web site, or something we discussed in class.</strong></p>
+<p>We saw the lecture given by Dr. Jeff Leek on 10/31 &amp; 11/5 and felt we could improve upon the algorithm presented in class.</p>
+</div>
+<div id="initial-questions" class="section level2">
+<h2>Initial Questions:</h2>
+<p><strong>What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?</strong></p>
+<p>Our goal is not to participate in the Kaggle competition, but rather explore and compare multiple methods for classifying sketches. We will compare a simple statistical model with a computationally heavy neural network.</p>
+</div>
+<div id="data" class="section level2">
+<h2>Data:</h2>
+<p><strong>What is the data source? Document the data import, wrangling, etc.</strong></p>
+<p>Data was downloaded from the Kaggle website. The website provided two types of data: a raw version and a simplified version that had been pre-processed. We chose to use the pre-processed data so we could focus on the methods.</p>
+<p>We also made the decision to look at just a subset of the drawing types. We wanted to keep the data down to a manageable size. We chose to look at all of the foods, a total of 30 image classes. The drawing types for the foods are listed below. For each food class, we only used 6,000 images (a small fraction of the total images) from the simplified data set. We allocated 5,000 images from each class to train our model and 1,000 images to test our model.</p>
+</div>
+<div id="exploratory-data-analysis" class="section level2">
+<h2>Exploratory Data Analysis</h2>
+<p><strong>What visualizations did you use to look at your data in different ways? What are the different statistical methods you considered?</strong></p>
+<p>First we plotted all 30 images to get a basic sense of the data. We explored why google labeled some as “recognized” and some as “unrecognized”. If you get a chance, look at some of the unrecognized drawings. People are very “creative” when given the chance.</p>
+<p>Following this we plotted the data in several methods to best prepare our algorithms for classification. This includes the data as points, connected lines, kernals and overlapped images.</p>
+</div>
+<div id="data-analysis" class="section level2">
+<h2>Data Analysis:</h2>
+<p><strong>What statistical or computational method did you apply and why? What others did you consider?</strong></p>
+<p>The two main approaches we used were simple maximum likelihood estimation and convolutional neural network. We considered using a regression tree for classification but had trouble appropriately cleaning the data.</p>
+</div>
+<div id="narrative-and-summary" class="section level2">
+<h2>Narrative and Summary:</h2>
+<p>** What did you learn about the data? How did you answer the questions? How can you justify your answers? What are the limitations of the analyses? **</p>
+<p>We learned the data can certainly be messy and require a great deal of wrangling for classification formatting. We needed to think a great deal about what data to “feed” into the model.</p>
+<p>Our biggest limitation was access to a powerful computing machine. These data are quick large and require a great deal of space to work with. Cloud/cluster access would be quite beneficial</p>
 </div>
 
 
