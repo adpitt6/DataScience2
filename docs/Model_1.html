@@ -9,9 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Lacey Etzkorn" />
 
-<meta name="date" content="2018-12-13" />
 
 <title>Model 1</title>
 
@@ -98,9 +96,6 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
@@ -115,6 +110,7 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
+
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -134,43 +130,6 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -192,77 +151,18 @@ $(document).ready(function () {
 });
 </script>
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
 </script>
 
 <!-- code folding -->
+
 
 
 
@@ -287,10 +187,10 @@ $(document).ready(function () {
   <a href="EDA.html">Exploratory Data Analysis</a>
 </li>
 <li>
-  <a href="Model_1.html">Method 1</a>
+  <a href="Model_1.html">MLE Approach</a>
 </li>
 <li>
-  <a href="AnUnconsciousApproach.html">Method 2</a>
+  <a href="AnUnconsciousApproach.html">CNN Approach</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -305,8 +205,6 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Model 1</h1>
-<h4 class="author"><em>Lacey Etzkorn</em></h4>
-<h4 class="date"><em>12/13/2018</em></h4>
 
 </div>
 
@@ -318,7 +216,7 @@ $(document).ready(function () {
 <p>We give an example of this procedure below.</p>
 <div id="figure-1-apple-drawing-overlayed-on-the-apple-and-broccoli-density-estimates" class="section level5">
 <h5>Figure 1: Apple Drawing Overlayed on the Apple and Broccoli Density Estimates</h5>
-<p><img src="../Empirical_Kernel/Apple_AppleKernel_Plot.png" width="200" /><img src="../Empirical_Kernel/Apple_BroccoliKernel_Plot.png" width="200" /></p>
+<p><img src="../Empirical_Kernel/Apple_AppleKernel_Plot.png" /><!-- --><img src="../Empirical_Kernel/Apple_BroccoliKernel_Plot.png" /><!-- --></p>
 <p>Above we plot a single apple drawing on top of our smoothed density estimate for the apple and broccoli drawings. The red points represent the sampled points along the image path from the original data. We see that where the red points intersect the Apple kernel in higher-density regions than where the red points intersect the broccoli kernel. Hence, if we sum up the log likelihoods at each of the red points for each class, we see that the likelihood that this image is from the apple class (-462) is higher than the likelihood it is from the broccoli class (-503).</p>
 </div>
 </div>
@@ -327,20 +225,20 @@ $(document).ready(function () {
 <p>Using this approach, we labeled 1,000 imgaes from each food class. Of the 30,000 images classified, 35.5% were classified correctly. With complete random guessing, we would expect to classify correctly only 1 in 30 images (3.3%)</p>
 <div id="figure-2-classification-matrix" class="section level5">
 <h5>Figure 2: Classification Matrix</h5>
-<p><img src="../Empirical_Kernel/Classifications1.png" width="550" /></p>
+<p><img src="../Empirical_Kernel/Classifications1.png" /><!-- --></p>
 <p>The classification matrix above was sorted by the class-specific accuracy, and we can see that the accuracy depended highly on the food class: we can classify popsicles, pears, and bread very well (&gt; 700 images each) while we classify cake, sandwiches, and blueberries poorly (&lt; 100 images each).</p>
 <p>We also see patterns in the mis-classification–cakes and birthday cakes were often cross-classified. String beans were often labeled as bananas. Broccoli and mushrooms were confused.</p>
 <p>We see that certain labels (bread, watermelon, pizzas) seemed to be catch-alls for other foods. We asked whether our algorithm was just labeling MORE things as popsicles, pears, and bread.</p>
 </div>
 <div id="figure-3-class-positive-predictions-and-sensitivity" class="section level5">
 <h5>Figure 3: Class Positive Predictions and Sensitivity</h5>
-<p><img src="../Empirical_Kernel/Model1.png" width="200" /></p>
+<p><img src="../Empirical_Kernel/Model1.png" /><!-- --></p>
 <p>While we were able to label ~80% of popsicles as popsicles, only about 40% of the things we labeled popsicles were popsicles. If we examine the classification matrix above, we see that many string beans and peanuts were also labeled as popsicles.</p>
 <p>We also plot a random sample of mis-classified doodles to get a sence of where we might be going wrong.</p>
 </div>
 <div id="figure-4-a-sampler-of-misclassified-foods" class="section level5">
 <h5>Figure 4: A Sampler of Misclassified Foods</h5>
-<p><img src="../Empirical_Kernel/Bad_Apples1.png" width="500" /></p>
+<p><img src="../Empirical_Kernel/Bad_Apples1.png" /><!-- --></p>
 <p>In the sample above, the true labels are given in green text while the classifications are given in red. From the sample above, we see that most of the misclassified images are recognizeable to the human eye, with the exception of the watermelon, sandwich, potato, popsicle, pizza, onion, bread, asparagus, and blackberry (9/30 images).</p>
 </div>
 </div>
@@ -355,6 +253,63 @@ $(document).ready(function () {
 <li><p><strong>The rotation model with clusters.</strong> We add kernels for each subclass that we generated by clustering. We in addition to comparing the raw data to the raw kernels and the rotated data to the rotated kernels, we compare the rotated data to the cluster-generated kernels.</p></li>
 <li><p><strong>The cherry picked model</strong> For each food class, we pick the kernel which we think best represents the data (raw, rotated, or rotated and clustered). We only compare a raw doodle to the raw kernels we have chosen and the rotated doodle to the rotated kernels we have chosen.</p></li>
 </ol>
+<p>We were surprised that our predictions did not get any better by considering rotations, clustering, or human selection of rotated vs. raw vs. clustered kernels.</p>
+<pre class="r"><code>x &lt;- data.frame(Model = 1:5, Accuracy = c(0.35, 0.19, 0.32, 0.32, 0.27))
+knitr::kable(x, format = &quot;html&quot;)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Model
+</th>
+<th style="text-align:right;">
+Accuracy
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="discussion-and-take-aways" class="section level2">
 <h2>Discussion and Take-Aways</h2>

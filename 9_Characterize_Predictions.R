@@ -66,7 +66,8 @@ arrange(desc(pred0))
 
 accuracy %>% print.data.frame()
 
-accuracy %>% select(-truth) %>% colSums
+accuracy %>% select(-truth) %>% colSums /30000
+
 
 ### get false positives
 truepos <- 
