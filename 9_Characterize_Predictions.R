@@ -2,6 +2,9 @@
 library(tidyverse)
 library(spatstat)
 
+####################################################################
+# Load and Format Data
+####################################################################
 ### Grab Prediction Files
 bin.files <- dir("Predictions",full.names = T)
 
@@ -46,7 +49,11 @@ pred.data <- pred.data %>%
 select(key_id, truth, pred0, pred1, pred2, pred3, pred4, 
        lik0, lik1, lik, lik.rotated, lik.all, data, data.rotated)
 
-### get accuracy
+####################################################################
+# Calculate Prediction Summaries
+####################################################################
+
+### accuracy
 accuracy <- 
 pred.data %>%
 group_by(truth) %>%
@@ -78,15 +85,19 @@ both <- left_join(
 	melt(accuracy, id.vars = "truth", value.name = "acc"),
 	by = c("value"="truth", "variable"))
 
+####################################################################
+# Plots
+####################################################################
+
 png("Empirical_Kernel/Model1.png", height = 400, width = 400)
-ggplot(both %>% filter(variable == "pred0")) + 
-geom_point(aes(x = pos, y = acc/1000)) +
-geom_text(aes(x = pos, y = acc/1000, label = value),
-          vjust = 1) +
-xlab("Class Positive Predictive Value")+
-ylab("Class Sensitivity") +
-xlim(0,.55) + ylim(0,.85) + 
-theme_bw()
+	ggplot(both %>% filter(variable == "pred0")) + 
+	geom_point(aes(x = pos, y = acc/1000)) +
+	geom_text(aes(x = pos, y = acc/1000, label = value),
+	          vjust = 1) +
+	xlab("Class Positive Predictive Value")+
+	ylab("Class Sensitivity") +
+	xlim(0,.55) + ylim(0,.85) + 
+	theme_bw()
 dev.off()
 
 ### Plot # correct predictions by class
@@ -156,8 +167,10 @@ dev.off()
 save(accuracy, file = file.path("Empirical_Kernel","Accuracy.rdata"))
 save(truepos, file = file.path("Empirical_Kernel","True_Pos.rdata"))
 
-
+####################################################################
 ### identify and plot bad predictions
+####################################################################
+
 bad.apples <- 
 pred.data %>%
 filter(truth !=pred0) %>%
@@ -178,6 +191,3 @@ png(file = "Empirical_Kernel/Bad_Apples1.png", width = 1000, height = 1000)
 		theme(strip.text = element_text(size = 16, color = "#8bc34a"))
 	)
 dev.off()
-
-### look at clusters of mis-classifications
-### look at correlations between kernels
