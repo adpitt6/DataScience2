@@ -82,9 +82,6 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
@@ -99,6 +96,7 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
+
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -118,43 +116,6 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -176,77 +137,18 @@ $(document).ready(function () {
 });
 </script>
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
 </script>
 
 <!-- code folding -->
+
 
 
 
@@ -393,7 +295,8 @@ div.tocify {
 <p>The first task we had was to plot a lot of drawings all at once. Looking at drawings individually would have been very time consuming. We chose to overlay 500 drawings on top of one another of each type to get a sense of the variability of shapes for each drawing. Here are the plots for apples, mushrooms, and bread:</p>
 <div id="figure-1-500-drawings-of-apples-mushrooms-and-bread" class="section level5">
 <h5>Figure 1: 500 Drawings of Apples, Mushrooms, and Bread</h5>
-<p><img src="../plots/Apple2.png" width="300" height="300" /><img src="../plots/Mushroom2.png" width="300" height="300" /><img src="../plots/Bread2.png" width="300" height="300" /> Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.</p>
+<p><img src="../plots/Apple2.png" /> <img src="../plots/Mushroom2.png" /> <embed src="../plots/Bread2.png%22" /></p>
+<p>Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.</p>
 <p>We asked the question: what if we didn’t connect the lines for each drawing? Since each drawing consists of a number of points connected in a path, we could just ignore how the points are connected and focus on the location of the points.</p>
 </div>
 <div id="figure-2-500-densities-of-apples-mushrooms-and-bread" class="section level5">
@@ -419,7 +322,7 @@ div.tocify {
 <p>We chose to rotate the images using a principal components (PC) rotation. We standardized the images so that the longest dimension of the image would go in the vertical direction. We then rescaled and shifted the images so that they would fit in the left-most part of the frame. The PC-rotated kernels and the original kernels are plotted below.</p>
 <div id="figure-5-smoothed-class-kernels-with-and-without-pc-rotations" class="section level5">
 <h5>Figure 5: Smoothed Class Kernels with and without PC Rotations</h5>
-<p><img src="../Empirical_Kernel/Kernels_withRotations.png" width="1700" /></p>
+<p><img src="../Empirical_Kernel/Kernels_withRotations.png" /><!-- --></p>
 <p>If we compare the empirical kernels before and after rotating, we see rotated kernels are more recognizeable for some food classes, but less so for others–the asparagus has a defined stalk, the banana has a defined crescent shape, the carrot has pointy ends, the potato is an oval shape, the string bean is long and narrow, the peanuts are all standing up, and the watermelon has a crescent on one side.</p>
 <p>In contrast, with pre-rotation, the kernels of other food classes become more indistinct or even look like other foods. The broccoli foliage at the top of the frame disappears the mushroom looks like a doughnut, and the pineapple and strawberry lose their characteristic foliage at the top.</p>
 <p>The rotation seems to benefit food classes that are long and symmetrical in their longest direction (bananas and string beans), muddle food classes that are long and assymmetrical in their longest direction (pineapple and lollipops), and have little effect on rounder objects (doughnuts and cookies).</p>
