@@ -7,9 +7,9 @@ navbar:
       href: index.html
     - text: "Exploratory Data Analysis"
       href: EDA.html
-    - text: "Method 1"
+    - text: "MLE Approach"
       href: Model_1.html
-    - text: "Method 2"
+    - text: "CNN Approach"
       href: AnUnconsciousApproach.html
 output:
   html_document:
