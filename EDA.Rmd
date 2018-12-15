@@ -18,9 +18,9 @@ The first task we had was to plot a lot of drawings all at once. Looking at draw
 
 ##### Figure 1: 500 Drawings of Apples, Mushrooms, and Bread
 
-![](../plots/Apple2.png)
-![](../plots/Mushroom2.png)
-![](../plots/Bread2.png")
+![](plots/Apple2.png)
+![](plots/Mushroom2.png)
+![](plots/Bread2.png")
 
 Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.
 
@@ -28,7 +28,7 @@ We asked the question: what if we didn't connect the lines for each drawing? Sin
 
 ##### Figure 2: 500 Densities of Apples, Mushrooms, and Bread
 ```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("../plots/Apple.png","../plots/Mushroom.png","../plots/Bread.png")
+myimages<-c("plots/Apple.png","plots/Mushroom.png","plots/Bread.png")
 knitr::include_graphics(myimages)
 ```
 
@@ -36,14 +36,14 @@ The images certainly become more difficult to recognize, but there is still a ba
 
 ##### Figure 3: Smoothed Class Kernels
 ```{r, echo=F, out.width=1200, out.height=1500}
-knitr::include_graphics("../Empirical_Kernel/Kernels_NoRotations.png")
+knitr::include_graphics("Empirical_Kernel/Kernels_NoRotations.png")
 ```
 
 We can still recognize some of the image classes from the kernels (pears, donuts, etc.). However, some kernels are unrecognizeable. We went back to the data and realized there might be a number of ways that each class can be drawn. Let's examine the watermelon, bananas, and peanuts. 
 
 ##### Figure 4: 500 Drawings of Watermelons, Bananas, and Peanuts
 ```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("../plots/Watermelon2.png","../plots/Banana2.png","../plots/Peanut2.png")
+myimages<-c("plots/Watermelon2.png","plots/Banana2.png","plots/Peanut2.png")
 knitr::include_graphics(myimages)
 ```
 
@@ -61,7 +61,7 @@ We chose to rotate the images using a principal components (PC) rotation. We sta
 ##### Figure 5: Smoothed Class Kernels with and without PC Rotations
 
 ```{r, echo=F}
-myimages<-c("../Empirical_Kernel/Kernels_withRotations.png")
+myimages<-c("Empirical_Kernel/Kernels_withRotations.png")
 knitr::include_graphics(myimages)
 ```
 
@@ -84,9 +84,9 @@ We can plot the multivariate distributions of the side-hit locations for each fo
 
 ##### Figure 6: Side-Hit Patterns for Watermelons (left), Bananas (center), and Peanuts (right)
 ```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("../plots/watermelon_cluster.png",
-	"../plots/banana_cluster.png",
-	"../plots/peanut_cluster.png")
+myimages<-c("plots/watermelon_cluster.png",
+	"plots/banana_cluster.png",
+	"plots/peanut_cluster.png")
 knitr::include_graphics(myimages)
 ```
 
@@ -94,9 +94,9 @@ If we look at the 500 watermelon sketches, we see that the half-circle watermelo
 
 ##### Figure 7: Side-Hit Patterns for Apples (left), Mushroom (center), and Bread (right)
 ```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("../plots/apple_cluster.png",
-	"../plots/mushroom_cluster.png",
-	"../plots/bread_cluster.png")
+myimages<-c("plots/apple_cluster.png",
+	"plots/mushroom_cluster.png",
+	"plots/bread_cluster.png")
 knitr::include_graphics(myimages)
 ```
 
@@ -107,9 +107,9 @@ We move forward by beforming k-means clustering on the six measurements given in
 ##### Figure 8: Sketch Plots of Food Class Clusters (Pizza, Watermelon, Bread)
 
 ```{r, echo=F, out.width=300, out.height=300}
-myimages<-c("../Cluster_Plots/pizza_rotated.png",
-	"../Cluster_Plots/watermelon_rotated.png",
-	"../Cluster_Plots/bread_rotated.png")
+myimages<-c("Cluster_Plots/pizza_rotated.png",
+	"Cluster_Plots/watermelon_rotated.png",
+	"Cluster_Plots/bread_rotated.png")
 knitr::include_graphics(myimages)
 ```
 
@@ -121,7 +121,7 @@ For the sake of "exploratory" data analysis, we also explored which foods looked
 
 ##### Figure 9: Food Class Kernels Clustered by Correlation
 ```{r, echo=F, out.width=1200, out.height=1500}
-knitr::include_graphics("../Empirical_Kernel/Kernel_Dendogram.png")
+knitr::include_graphics("Empirical_Kernel/Kernel_Dendogram.png")
 ```
 
 We see some close relationships between the kernels that make a lot of sense:
@@ -129,6 +129,6 @@ Hamburgers and sandiwches; cakes and birthday cakes; broccoli and mushrooms; str
 
 ##### Figure 10: Correlation Matrix for Food Class Kernels
 ```{r, echo=F, out.width=1200, out.height=1500}
-knitr::include_graphics("../Empirical_Kernel/Kernel_Correlation_Mat.png")
+knitr::include_graphics("Empirical_Kernel/Kernel_Correlation_Mat.png")
 ```
 
