@@ -289,6 +289,9 @@ $(document).ready(function () {
 <li>
   <a href="Model_1.html">Method 1</a>
 </li>
+<li>
+  <a href="AnUnconsciousApproach.html">Method 2</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -339,7 +342,7 @@ $(document).ready(function () {
 <p>We chose to rotate the images using a principal components (PC) rotation. We standardized the images so that the longest dimension of the image would go in the vertical direction. We then rescaled and shifted the images so that they would fit in the left-most part of the frame. The PC-rotated kernels and the original kernels are plotted below.</p>
 <div id="figure-5-smoothed-class-kernels-with-and-without-pc-rotations" class="section level5">
 <h5>Figure 5: Smoothed Class Kernels with and without PC Rotations</h5>
-<p><img src="../Empirical_Kernel/Kernels_withRotations.png" /><!-- --></p>
+<p><img src="../Empirical_Kernel/Kernels_withRotations.png" width="1700" /></p>
 <p>If we compare the empirical kernels before and after rotating, we see rotated kernels are more recognizeable for some food classes, but less so for others–the asparagus has a defined stalk, the banana has a defined crescent shape, the carrot has pointy ends, the potato is an oval shape, the string bean is long and narrow, the peanuts are all standing up, and the watermelon has a crescent on one side.</p>
 <p>In contrast, with pre-rotation, the kernels of other food classes become more indistinct or even look like other foods. The broccoli foliage at the top of the frame disappears the mushroom looks like a doughnut, and the pineapple and strawberry lose their characteristic foliage at the top.</p>
 <p>The rotation seems to benefit food classes that are long and symmetrical in their longest direction (bananas and string beans), muddle food classes that are long and assymmetrical in their longest direction (pineapple and lollipops), and have little effect on rounder objects (doughnuts and cookies).</p>
