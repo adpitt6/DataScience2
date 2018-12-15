@@ -1,7 +1,7 @@
 name: "dsfinal-website"
 output_dir: "."
 navbar:
-  title: "Data Science Final Project"
+  title: "DATA SCIENCE 2018 PROJECT"
   left:
     - text: "Home"
       href: index.html
