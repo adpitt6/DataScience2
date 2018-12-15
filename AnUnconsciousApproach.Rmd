@@ -86,7 +86,7 @@ use 5000 images per type, split 4:1 into training and validation sets
 pick the model at the epoch that combines _lowest validation loss_ and _highest validation accuracy_, here epoch 12 -- see the training history below
 
 ```{r history, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("model2_history.png")
+knitr::include_graphics("docs/TrangPlots/model2_history.png")
 ```
 
 
@@ -107,9 +107,9 @@ _OurCNN_ uses those points and points between them, but reduces resolution to 32
 Here are the three data versions for a watermelon, a sandwich, and a pear.
 
 ```{r datareduction, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("data_reduction_watermelon.png")
-knitr::include_graphics("data_reduction_sandwich.png")
-knitr::include_graphics("data_reduction_pear.png")
+knitr::include_graphics("docs/TrangPlots/data_reduction_watermelon.png")
+knitr::include_graphics("docs/TrangPlots/data_reduction_sandwich.png")
+knitr::include_graphics("docs/TrangPlots/data_reduction_pear.png")
 ```
 
 Hmm, it is now clear that we trained the MLE classifier using less data than we did _OurCNN_.
@@ -126,8 +126,8 @@ _OurCNN_ was trained on a random sample of images recognized by Google AI.
 Here are two examples of Google-recognized and Google-unrecognized images.
 
 ```{r recunrec, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("rec_unrec_broccoli.png")
-knitr::include_graphics("rec_unrec_blackberry.png")
+knitr::include_graphics("docs/TrangPlots/rec_unrec_broccoli.png")
+knitr::include_graphics("docs/TrangPlots/rec_unrec_blackberry.png")
 ```
 
 
@@ -139,7 +139,7 @@ knitr::include_graphics("rec_unrec_blackberry.png")
 We are, of course, curious to see how _OurCNN_ performs compared to Google AI on each of these food types. We took a random sample of 1000 images of each food (regardless of whether they are recognized by Google AI or not) and put them through _OurCNN_. Below is how _OurCNN_ performs on these images, compared to Google AI recognition rates based on the whole [dataset](https://www.kaggle.com/c/quickdraw-doodle-recognition/data) available to us.
 
 ```{r cnngoogle, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("cnn_vs_google.png")
+knitr::include_graphics("docs/TrangPlots/cnn_vs_google.png")
 ```
 
 Hah, _OurCNN_ is outperformed on ALL these food types. 
@@ -152,7 +152,7 @@ It is amazing that on those that _OurCNN_ really struggles to differentiate, Goo
 As _OurCNN_ was trained on images whose category, it is appropriate to first look at how it performs on a random test set of Google-recognized images (again, 1000 images per food). This performance is shown in the classification probability matrix below, where the food types are sorted by classification accuracy.
 
 ```{r recognized, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("recognized_ordered.png")
+knitr::include_graphics("docs/TrangPlots/recognized_ordered.png")
 ```
 
 It does not bad!
@@ -168,7 +168,7 @@ It is clear _OurCNN_ does better for some food types and worse for others. Cakes
 Let's zoom into the images that are misclassified and rearrange them a bit, so that we see what each food tends to be misclassified as.
 
 ```{r wrongrecognized, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("wrong_recognized_reordered.png")
+knitr::include_graphics("docs/TrangPlots/wrong_recognized_reordered.png")
 ```
 
 
@@ -183,7 +183,7 @@ There are some one-way relationships. Cookie is the object of classification for
 Let's look at several of the pairs.
 
 ```{r eightpairs, echo=FALSE, fig.align='center', out.width = '80%'}
-knitr::include_graphics("eight_pairs.png")
+knitr::include_graphics("docs/TrangPlots/eight_pairs.png")
 ```
 
 Interesting! Some of them, we can kind of see why. Some of them, not.
@@ -194,14 +194,14 @@ Interesting! Some of them, we can kind of see why. Some of them, not.
 We now subject _OurCNN_ to a random set of Google-unrecognized images.
 
 ```{r unrecognized, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("unrecognized_ordered.png")
+knitr::include_graphics("docs/TrangPlots/unrecognized_ordered.png")
 ```
 
 At the highest, _OurCNN_ correctly classifies 38% of the pizza images in this set. At the lowest, 6.8% of the pear images. Contrast this with the probability of 0.032 when tossing a 31-sided coin.
 
 It is interesting that there seem to be some favorites among the labels (blackberry and peas) for classifying any random category. Do bad drawings tend to have certain types of strokes that are commonly present in blackberry and/or peas drawings? Let's look at some of these non-blackberries that are classified as blackberries (below, left) next to some good (Google-recognized) blackberries that _OurCNN_ also classified as blackberries (below, right).
 
-![](other_as_blackberry.png){width=49%} ![](blackberry_as_blackberry.png){width=49%}
+![](docs/TrangPlots/other_as_blackberry.png){width=49%} ![](docs/TrangPlots/blackberry_as_blackberry.png){width=49%}
 
 Perhaps the one thing in common between these two sets of images is that there are a lot of busy pixels!
 
@@ -211,7 +211,7 @@ To be complete, let's also look at the classification probabilities of Google-un
 
 
 ```{r wrongunrecognized, echo=FALSE, fig.align='center', out.width = '70%'}
-knitr::include_graphics("wrong_unrecognized_reordered.png")
+knitr::include_graphics("docs/TrangPlots/wrong_unrecognized_reordered.png")
 ```
 
 We do not see anything additional here that was not noticed before.

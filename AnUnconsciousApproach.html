@@ -11,7 +11,7 @@
 
 
 
-<title>A Unconscious Approach</title>
+<title>An Unconscious Approach</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -383,13 +383,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">A Unconscious Approach</h1>
+<h1 class="title toc-ignore">An Unconscious Approach</h1>
 
 </div>
 
 
-<p>The cool thing about the Conscious approach, which we used in building <a href="https://adpitt6.github.io/DataScience2/Model_1.html">the MLE classifier</a> is that we get to learn lots about how people draw things. Like, you can have a whole pizza, or you can have just a slice. Or most bananas dutifully obey the law of gravity, but some mischievous ones don’t.</p>
-<p>Now, switching gears, think about this: What if we take an Unconscious approach? Put all that domain knowledge we have gained aside (as if we had never even looked at those images) and rely on machine brute force? Can a machine learning algorithm that does not benefit from our human visual perception (and is pretty much a black box) do a decent job at classifying <a href="https://quickdraw.withgoogle.com/"><em>Quick! Draw</em></a> images? We tried one that is popular for classifying images: a <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional neural network</a>. We name it <em>OurCNN</em> (not the news channel).</p>
+<p>We can think of the approach of doing a lot of <a href="link%20to%20tab%202">EDA</a> and trying out different models in building <a href="link%20to%20tab%203">the MLE classifier</a> as a <em>conscious</em> approach. A really nice thing about this approach, in addition to the resulting classifier, is that we get to learn lots about how people draw things. Like, you can have a whole pizza, or you can have just a slice. Or most bananas dutifully obey the law of gravity, but some mischievous ones don’t.</p>
+<p>Now we try an <em>unconscious</em> approach. Let’s put all the domain knowledge we have aside, and pretend that we never even looked at those images. Let’s see if we can make up for all that with machine brute force. The question is: Can a machine learning algorithm that does not benefit from our human visual perception (and is pretty much a black box) do a decent job at classifying <a href="https://quickdraw.withgoogle.com/"><em>Quick! Draw</em></a> images? We tried one that is popular for classifying images: a <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional neural network</a>. We name it <em>OurCNN</em> (not the news channel).</p>
 <div id="ourcnn-specs" class="section level1">
 <h1><em>OurCNN</em> specs</h1>
 <div id="input" class="section level2">
@@ -398,7 +398,7 @@ div.tocify {
 </div>
 <div id="output" class="section level2">
 <h2>Output</h2>
-<p>a label out of 31 edibles:</p>
+<p>a label out of 31 types of food:</p>
 <p>apple, asparagus, banana, birthday cake, blackberry, blueberry, bread, broccoli, cake, carrot, cookie, donut, grapes, hamburger, hot dog, ice cream, lollipop, mushroom, onion, peanut, pear, peas, pineapple, pizza, popsicle, potato, sandwich, steak, strawberry, string bean, watermelon</p>
 <p>note: This is one category more than the number of categories that went into the MLE classifier. Just an error in copying text :-)</p>
 </div>
@@ -444,9 +444,11 @@ div.tocify {
 <h3>c. Training</h3>
 <p>20 epochs</p>
 <p>batch size 32</p>
-<p>use 5000 images per type, split 4:1 into training and validation sets – a fraction of the 140-300K images available per type</p>
+<p>use 5000 images per type, split 4:1 into training and validation sets</p>
 <p>pick the model at the epoch that combines <em>lowest validation loss</em> and <em>highest validation accuracy</em>, here epoch 12 – see the training history below</p>
 <p><img src="docs/TrangPlots/model2_history.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We experienced here that a more powerful model performs better. One with 20 (instead of 32) filters in each convolution layer and 128 (instead of 256) neurons in the dense layer has slightly lower accuracy. Also, more training data results in better accuracy, on the same model.</p>
+<p>We could not afford to handle either a more powerful model or more data. This one took two days to train on a laptop computer that needs to be used for other work :-)</p>
 </div>
 <div id="d.-data" class="section level3">
 <h3>d. Data</h3>
@@ -474,21 +476,24 @@ div.tocify {
 <h1><em>OurCNN</em> performance</h1>
 <div id="relative-to-google-ai" class="section level2">
 <h2>Relative to Google AI</h2>
-<p>We are, of course, curious to see how <em>OurCNN</em> performs compared to Google AI on each of these edibles. We took a random sample of 1000 images of each edible (regardless of whether they are recognized by Google AI or not) and put them through <em>OurCNN</em>. Below is how <em>OurCNN</em> performs on these images, compared to Google AI recognition rates based on the whole <a href="https://www.kaggle.com/c/quickdraw-doodle-recognition/data">dataset</a> available to us.</p>
+<p>We are, of course, curious to see how <em>OurCNN</em> performs compared to Google AI on each of these food types. We took a random sample of 1000 images of each food (regardless of whether they are recognized by Google AI or not) and put them through <em>OurCNN</em>. Below is how <em>OurCNN</em> performs on these images, compared to Google AI recognition rates based on the whole <a href="https://www.kaggle.com/c/quickdraw-doodle-recognition/data">dataset</a> available to us.</p>
 <p><img src="docs/TrangPlots/cnn_vs_google.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>Hah, <em>OurCNN</em> is outperformed on ALL the edibles.</p>
-<p>It is amazing that on those that <em>OurCNN</em> really struggles to differentiate, Google AI has recognition rates of 8x-9x percent! And this is even more awesome (for Google!) when you remind yourself that Google AI has to differentiate among 340 different things. <em>OurCNN</em> has the much simpler job of differentiating only 31 of those things (sorry, we don’t care much about non-edibles).</p>
+<p>Hah, <em>OurCNN</em> is outperformed on ALL these food types.</p>
+<p>It is amazing that on those that <em>OurCNN</em> really struggles to differentiate, Google AI has recognition rates of 8x-9x percent! And this is even more awesome (for Google!) when you remind yourself that Google AI has to differentiate among 340 different things. <em>OurCNN</em> has the much simpler job of differentiating only 31 of those things (sorry, we don’t care much about non-foods).</p>
 </div>
 <div id="on-google-recognized-images" class="section level2">
 <h2>On Google-recognized images</h2>
-<p>As <em>OurCNN</em> was trained on images whose category, it is appropriate to first look at how it performs on a random test set of Google-recognized images (again, 1000 images per edible). This performance is shown in the classification probability matrix below, where the edibles are sorted by classification accuracy.</p>
+<p>As <em>OurCNN</em> was trained on images whose category, it is appropriate to first look at how it performs on a random test set of Google-recognized images (again, 1000 images per food). This performance is shown in the classification probability matrix below, where the food types are sorted by classification accuracy.</p>
 <p><img src="docs/TrangPlots/recognized_ordered.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><em>OurCNN</em> does better for some edibles and worse for others. Like we saw before when building the MLE classifier, cakes and birthday cakes are often confused. And from the perspective of <em>OurCNN</em>, some blackberries look like grapes.</p>
-<p>Let’s now zoom into the images that are misclassified and rearrange them a bit, so that we see what each edible tends to be misclassified as.</p>
+<p>It does not bad!</p>
+<p><em>OurCNN</em> is a black box. We don’t know what goes on inside it, like what the filters look like, what the weights of the nodes are, what thresholds are involved in activation, what factors are used for batch normalization, etc.</p>
+<p>But we can observe its behavior to satisfy our human desire to learn.</p>
+<p>It is clear <em>OurCNN</em> does better for some food types and worse for others. Cakes and birthday cakes are often confused. And from the perspective of <em>OurCNN</em>, some blackberries probably look like grapes.</p>
+<p>Let’s zoom into the images that are misclassified and rearrange them a bit, so that we see what each food tends to be misclassified as.</p>
 <p><img src="docs/TrangPlots/wrong_recognized_reordered.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>It looks like most of the confusion of <em>OurCNN</em> happen in pairs of edibles. Clearly, cake and birthday cake are a pair. Cakes are generally not cake-like enough because they look more like birthdday cakes, and birthday cakes are generally not birthday-y enough because they look more like cakes.</p>
+<p>It looks like most of the confusion of <em>OurCNN</em> happens in pairs of food. Clearly, cake and birthday cake are a pair. Cakes are generally not cake-like enough because they look more like birthdday cakes, and birthday cakes are generally not birthday-y enough because they look more like cakes.</p>
 <p>Other pairs are popsicle-lollipop, mushroom-broccoli, strawberry-pineapple, potato-cookie, pear-apple, string bean-banana, etc.</p>
-<p>Some edibles are involves in more than one pair. Grapes is in a primary pair with blackberry, and in a secondary pair with peas. String been is paired with both banana and asparagus. Apple is paired with both blackberry and pear.</p>
+<p>Some food types are involved in more than one pair. Grapes is in a primary pair with blackberry, and in a secondary pair with peas. String been is paired with both banana and asparagus. Apple is paired with both blackberry and pear.</p>
 <p>There are some one-way relationships. Cookie is the object of classification for bad pizza but much less the opposite. Steak is an object of classification for donut, but not the other way around. Quite a few bad pears look like peanuts, but few bad peanuts look like pears.</p>
 <p>Let’s look at several of the pairs.</p>
 <p><img src="docs/TrangPlots/eight_pairs.png" width="80%" style="display: block; margin: auto;" /></p>
@@ -500,7 +505,7 @@ div.tocify {
 <p><img src="docs/TrangPlots/unrecognized_ordered.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>At the highest, <em>OurCNN</em> correctly classifies 38% of the pizza images in this set. At the lowest, 6.8% of the pear images. Contrast this with the probability of 0.032 when tossing a 31-sided coin.</p>
 <p>It is interesting that there seem to be some favorites among the labels (blackberry and peas) for classifying any random category. Do bad drawings tend to have certain types of strokes that are commonly present in blackberry and/or peas drawings? Let’s look at some of these non-blackberries that are classified as blackberries (below, left) next to some good (Google-recognized) blackberries that <em>OurCNN</em> also classified as blackberries (below, right).</p>
-<p><img src="other_as_blackberry.png" style="width:49.0%" /> <img src="blackberry_as_blackberry.png" style="width:49.0%" /></p>
+<p><img src="docs/TrangPlots/other_as_blackberry.png" style="width:49.0%" /> <img src="docs/TrangPlots/blackberry_as_blackberry.png" style="width:49.0%" /></p>
 <p>Perhaps the one thing in common between these two sets of images is that there are a lot of busy pixels!</p>
 <p>Wait! Isn’t it super cool that <em>OurCNN</em> includes Blackberry the hand-held device?</p>
 <p>To be complete, let’s also look at the classification probabilities of Google-unrecognized images that are misclassified by <em>OurCNN</em>.</p>
@@ -509,13 +514,14 @@ div.tocify {
 <!-- the overall Google-recognized rate for an equal-weight mixture of these 31 edibles is 93.2%. -->
 </div>
 </div>
-<div id="conclusions" class="section level1">
-<h1>Conclusions</h1>
+<div id="parting-words" class="section level1">
+<h1>Parting words</h1>
 <p>This Unconscious approach works quite well.</p>
-<p>While <em>OurCNN</em> is nothing compared to Google AI, it is limited by several resources that we guess do not affect Google AI: (1) we use only a fraction of the data to train the classifier (5K images/edible, compared to the 140-300K images/edible available); (2) we wanted to try more powerful architectures, but could not handle them computationally.</p>
-<p><em>OurCNN</em> in its current version took several days to train on one of our laptop computer without GPU and has to deal with other tasks while running this. If and when we manage to use Hopkins’s cluster computing resources for the training, we would be able to see if we can get a more powerful version of <em>OurCNN</em> and see how it compares with Google AI.</p>
+<p>While <em>OurCNN</em> is nothing compared to Google AI, it is limited by several resources that we guess do not affect Google AI: (1) we use only a fraction of the data to train the classifier (5K images/food type, compared to the 140-300K images/type available); (2) we wanted to try more powerful architectures, but could not handle them computationally.</p>
+<p>We trained this version of <em>OurCNN</em> on a laptop. If we manage to use Hopkins’s cluster computing resources for the training, we would be able to see if we can get a more powerful version of <em>OurCNN</em> and see how it compares with Google AI.</p>
 <p>Comparing these two early products – or prototypes, to be precise – from the Conscious and Unconscious approaches, we venture to say that the Unconscious approach is a contender. Perhaps humans and machines have different ways to see things that both are valuable.</p>
-<p>But, let’s recognize that such comparison is unreasonable. We know well (from the data reduction plots above) that the MLE classifier is malnourished. With a lot more data (both data from each image and number of images), the MLE classifier might be a lot more powerful. We need to try that and come back to you.</p>
+<p>But, let’s recognize that such comparison is unreasonable. We know well (from the data reduction plots above) that the MLE classifier is malnourished. With a lot more data (both data from each image and number of images), the MLE classifier might be a lot more powerful. Also, there are a lot of options for the <em>conscious</em> model building approach. We have seen five MLE models, but our human creativity can keep coming up with more models and better ones.</p>
+<p>As for the <em>unconscious</em> approach, it would be nice to build a classifier that takes in a combination of image data and non-image features (e.g., country of orgin or anything else we might know about an image in a specific application), and thus uses all the available data for classification. We just have to go do that and come back to you.</p>
 </div>
 
 

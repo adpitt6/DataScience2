@@ -3,6 +3,7 @@
 knitr::include_graphics("QuickDrawPic.png")
 ```
 
+[Image source](https://quickdraw.withgoogle.com/)
 
 ## Quick, Draw!
 
@@ -41,3 +42,8 @@ knitr::include_graphics("Sketch_30_Foods.png")
 After data exploration, hopefully you see how "creative" some people can be. (cover your eyes)
 
 Check [here](https://github.com/adpitt6/DataScience2) to see how we did it!
+
+
+And some comparison of the two models
+
+![](docs/Classifications0.png){width=49%} ![](docs/mix_ordered_homepage.png){width=49%}
