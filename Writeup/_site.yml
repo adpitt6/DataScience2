@@ -9,6 +9,8 @@ navbar:
       href: EDA.html
     - text: "Method 1"
       href: Model_1.html
+    - text: "Method 2"
+      href: AnUnconsciousApproach.html
 output:
   html_document:
     theme: yeti
