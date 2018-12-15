@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Lacey Etzkorn" />
+
+<meta name="date" content="2018-12-13" />
+
+<title>Model 1</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Data Science Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="EDA.html">Exploratory Data Analysis</a>
+</li>
+<li>
+  <a href="Model_1.html">Method 1</a>
+</li>
+<li>
+  <a href="AnUnconsciousApproach.html">Method 2</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Model 1</h1>
+<h4 class="author"><em>Lacey Etzkorn</em></h4>
+<h4 class="date"><em>12/13/2018</em></h4>
+
+</div>
+
+
+<div id="basic-idea" class="section level2">
+<h2>Basic Idea</h2>
+<p>As a first try at classifying images, we constructed a simple statistical model. Since each image consists of a small number of points that make up a path, we could think about those points as being iid draws from a two-dimensional density determined by the food class.</p>
+<p>Then, we could compare sample points from each drawing to our smooth empirical density estimate for each food class. We can calculate a log-likelihood that the drawing came from each of the thirty food classes. Finally, we predict that the image came from the class with the largest log-likelihood.</p>
+<p>We give an example of this procedure below.</p>
+<div id="figure-1-apple-drawing-overlayed-on-the-apple-and-broccoli-density-estimates" class="section level5">
+<h5>Figure 1: Apple Drawing Overlayed on the Apple and Broccoli Density Estimates</h5>
+<p><img src="../Empirical_Kernel/Apple_AppleKernel_Plot.png" width="200" /><img src="../Empirical_Kernel/Apple_BroccoliKernel_Plot.png" width="200" /></p>
+<p>Above we plot a single apple drawing on top of our smoothed density estimate for the apple and broccoli drawings. The red points represent the sampled points along the image path from the original data. We see that where the red points intersect the Apple kernel in higher-density regions than where the red points intersect the broccoli kernel. Hence, if we sum up the log likelihoods at each of the red points for each class, we see that the likelihood that this image is from the apple class (-462) is higher than the likelihood it is from the broccoli class (-503).</p>
+</div>
+</div>
+<div id="model-results" class="section level2">
+<h2>Model Results</h2>
+<p>Using this approach, we labeled 1,000 imgaes from each food class. Of the 30,000 images classified, 35.5% were classified correctly. With complete random guessing, we would expect to classify correctly only 1 in 30 images (3.3%)</p>
+<div id="figure-2-classification-matrix" class="section level5">
+<h5>Figure 2: Classification Matrix</h5>
+<p><img src="../Empirical_Kernel/Classifications1.png" width="550" /></p>
+<p>The classification matrix above was sorted by the class-specific accuracy, and we can see that the accuracy depended highly on the food class: we can classify popsicles, pears, and bread very well (&gt; 700 images each) while we classify cake, sandwiches, and blueberries poorly (&lt; 100 images each).</p>
+<p>We also see patterns in the mis-classification–cakes and birthday cakes were often cross-classified. String beans were often labeled as bananas. Broccoli and mushrooms were confused.</p>
+<p>We see that certain labels (bread, watermelon, pizzas) seemed to be catch-alls for other foods. We asked whether our algorithm was just labeling MORE things as popsicles, pears, and bread.</p>
+</div>
+<div id="figure-3-class-positive-predictions-and-sensitivity" class="section level5">
+<h5>Figure 3: Class Positive Predictions and Sensitivity</h5>
+<p><img src="../Empirical_Kernel/Model1.png" width="200" /></p>
+<p>While we were able to label ~80% of popsicles as popsicles, only about 40% of the things we labeled popsicles were popsicles. If we examine the classification matrix above, we see that many string beans and peanuts were also labeled as popsicles.</p>
+<p>We also plot a random sample of mis-classified doodles to get a sence of where we might be going wrong.</p>
+</div>
+<div id="figure-4-a-sampler-of-misclassified-foods" class="section level5">
+<h5>Figure 4: A Sampler of Misclassified Foods</h5>
+<p><img src="../Empirical_Kernel/Bad_Apples1.png" width="500" /></p>
+<p>In the sample above, the true labels are given in green text while the classifications are given in red. From the sample above, we see that most of the misclassified images are recognizeable to the human eye, with the exception of the watermelon, sandwich, potato, popsicle, pizza, onion, bread, asparagus, and blackberry (9/30 images).</p>
+</div>
+</div>
+<div id="extending-the-model" class="section level2">
+<h2>Extending the Model</h2>
+<p>Our exploratory data analysis demonstrated a high degree of rotational variability in some food classes, such as the banana, asparagus, carrot, string bean, potato, and peanut. Other food classes seemed to be made up of multiple food sub-classes (pizza and watermelon). Hence, incorporating rotatinal variability and sub-classes into our model might improve our predictions.</p>
+<p>We consider comparing the following prediction pipelines:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>The original model</strong> (as demonstrated above). We compare the un-transformed image to the raw kernels.</p></li>
+<li><p><strong>The rotation model.</strong> We compare the PCA-rotated image (described in the EDA) to the Pre-rotated kernels.</p></li>
+<li><p><strong>The combined model.</strong> We take whichever label from class one or two that produced a higher log likelihood.</p></li>
+<li><p><strong>The rotation model with clusters.</strong> We add kernels for each subclass that we generated by clustering. We in addition to comparing the raw data to the raw kernels and the rotated data to the rotated kernels, we compare the rotated data to the cluster-generated kernels.</p></li>
+<li><p><strong>The cherry picked model</strong> For each food class, we pick the kernel which we think best represents the data (raw, rotated, or rotated and clustered). We only compare a raw doodle to the raw kernels we have chosen and the rotated doodle to the rotated kernels we have chosen.</p></li>
+</ol>
+</div>
+<div id="discussion-and-take-aways" class="section level2">
+<h2>Discussion and Take-Aways</h2>
+<p>Our model was very quick to construct, and predicting new images was very quick. We believe the reason for this was largely due to the fact that we kept the data in it’s small form.</p>
+<p>For most traditional image processing and classification, the images need to be in a raster format. For an image on a 256 x 256 grid the computer has to store 65,536 numbers for each image. However, we retained the data format provided by google, which stores the images as roughly 50 ordered (x,y) pairs. Hence, we could could easily work with 5,000 images from 30 classes (only 1.5 million numbers) all at once.</p>
+<p>While</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

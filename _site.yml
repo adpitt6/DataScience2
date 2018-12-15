@@ -1,0 +1,16 @@
+name: "dsfinal-website"
+output_dir: "."
+navbar:
+  title: "Data Science Final Project"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Exploratory Data Analysis"
+      href: EDA.html
+    - text: "Method 1"
+      href: Model_1.html
+    - text: "Method 2"
+      href: AnUnconsciousApproach.html
+output:
+  html_document:
+    theme: yeti
