@@ -1,7 +1,12 @@
 ---
-title: "Model 1"
-output:
-  html_document: default
+title: "Maximum Likelihood Estimation"
+output: 
+    html_document:
+        theme: cosmo 
+        toc: true
+        toc_float: true
+        highlight: tango
+        number_sections: false
 ---
 
 ## Basic Idea

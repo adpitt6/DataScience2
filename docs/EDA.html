@@ -9,37 +9,21 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Lacey Etzkorn" />
 
-<meta name="date" content="2018-11-16" />
 
 <title>Exploratory Data Analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
 
 
 
@@ -107,33 +91,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 45px;
+  padding-top: 51px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h2 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h3 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h4 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h5 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h6 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .dropdown-submenu {
   position: relative;
@@ -266,6 +250,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -287,10 +366,10 @@ $(document).ready(function () {
   <a href="EDA.html">Exploratory Data Analysis</a>
 </li>
 <li>
-  <a href="Model_1.html">Method 1</a>
+  <a href="Model_1.html">MLE Approach</a>
 </li>
 <li>
-  <a href="AnUnconsciousApproach.html">Method 2</a>
+  <a href="AnUnconsciousApproach.html">CNN Approach</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -305,14 +384,12 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Exploratory Data Analysis</h1>
-<h4 class="author"><em>Lacey Etzkorn</em></h4>
-<h4 class="date"><em>11/16/2018</em></h4>
 
 </div>
 
 
-<div id="initial-plots" class="section level4">
-<h4>Initial Plots</h4>
+<div id="initial-plots" class="section level2">
+<h2>Initial Plots</h2>
 <p>The first task we had was to plot a lot of drawings all at once. Looking at drawings individually would have been very time consuming. We chose to overlay 500 drawings on top of one another of each type to get a sense of the variability of shapes for each drawing. Here are the plots for apples, mushrooms, and bread:</p>
 <div id="figure-1-500-drawings-of-apples-mushrooms-and-bread" class="section level5">
 <h5>Figure 1: 500 Drawings of Apples, Mushrooms, and Bread</h5>
@@ -336,8 +413,8 @@ $(document).ready(function () {
 <p>For the watermelons, we can think of the variations as sub-classes. If we can somehow separate the watermelon class of drawings into sub-classes (whole, half, wedge), and estimate a kernel for each subclass separately, our prediction algorithm might improve. For bananas and peanuts, we can think of the variations in drawings being due to rotation. If we can find a way to rotate training and test data prior to kernel estimation and prediction (respectively), our algorithm may also improve.</p>
 </div>
 </div>
-<div id="rotating-data-to-a-standard-orientation" class="section level4">
-<h4>Rotating Data to a Standard Orientation</h4>
+<div id="rotating-data-to-a-standard-orientation" class="section level2">
+<h2>Rotating Data to a Standard Orientation</h2>
 <p>A source of variation in the images is how the artist chose to orient their drawing. For some drawings, such as the apple, doodlers uniformly choose to place their apple upright. However, there was a lot of varaition in how artists chose to draw bananas (as seen above).</p>
 <p>We chose to rotate the images using a principal components (PC) rotation. We standardized the images so that the longest dimension of the image would go in the vertical direction. We then rescaled and shifted the images so that they would fit in the left-most part of the frame. The PC-rotated kernels and the original kernels are plotted below.</p>
 <div id="figure-5-smoothed-class-kernels-with-and-without-pc-rotations" class="section level5">
@@ -349,8 +426,8 @@ $(document).ready(function () {
 <p>Moving forward, we will likely only use the pre-rotated kernels for the food classes that look good: string bean, potato, peanut, carrot, banana, asparagus, watermelon, hotdog.</p>
 </div>
 </div>
-<div id="determining-food-sub-classes" class="section level4">
-<h4>Determining Food Sub-Classes</h4>
+<div id="determining-food-sub-classes" class="section level2">
+<h2>Determining Food Sub-Classes</h2>
 <p>From earlier exploratory data analysis, it became clear that certain food classes might be drawn in qualitatively different ways. Pizzas and watermelons might be drawn as a slice or a circle. Bread might be a loaf or a square slice.</p>
 <p>One way we might think of separating each class into sub-classes is a clustering approach. But what features might we use to cluster? We chose to do the clustering by measuring where each image hits the side of the 256 x 256 frame. We know that the images were preprocessed in such a way that each image hits both the top and left side of the frame as well as the bottom or the right sides. Whether and where the image hits each side of the frame might tell us which sub-class the image falls into.</p>
 <p>We can plot the multivariate distributions of the side-hit locations for each food class and visually scan for clustering patterns. We see the clustering patterns in watermelons, bananas, and peanuts below:</p>
@@ -371,8 +448,8 @@ $(document).ready(function () {
 <p>From the above sketch plots, we see that we have fairly effectively separated pizza and watermelon slices from the whole versions. Even though we saw 5 clusters in the pair plots above for watermelon, there are really only two types of watermelon.</p>
 </div>
 </div>
-<div id="examining-relationships-between-foods" class="section level4">
-<h4>Examining Relationships Between Foods</h4>
+<div id="examining-relationships-between-foods" class="section level2">
+<h2>Examining Relationships Between Foods</h2>
 <p>For the sake of “exploratory” data analysis, we also explored which foods looked the most alike, according to our empirical kernels. We examined the point-wise correlation between the empirical kernels for each food class and performed a heirarchical clustering to obtain the following dendogram.</p>
 <div id="figure-9-food-class-kernels-clustered-by-correlation" class="section level5">
 <h5>Figure 9: Food Class Kernels Clustered by Correlation</h5>
@@ -387,6 +464,8 @@ $(document).ready(function () {
 
 
 
+</div>
+</div>
 
 </div>
 

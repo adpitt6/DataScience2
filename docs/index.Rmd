@@ -1,6 +1,3 @@
----
-title: "Overview"
----
 
 ```{r echo = FALSE, message=FALSE}
 knitr::include_graphics("../QuickDrawPic.png")
