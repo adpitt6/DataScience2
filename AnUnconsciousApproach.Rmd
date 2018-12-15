@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-We can think of the approach of doing a lot of [EDA](link to tab 2) and trying out different models in building [the MLE classifier](link to tab 3) as a _conscious_ approach. A really nice thing about this approach, in addition to the resulting classifier, is that we get to learn lots about how people draw things. Like, you can have a whole pizza, or you can have just a slice. Or most bananas dutifully obey the law of gravity, but some mischievous ones don't.
+We can think of the approach of doing a lot of [EDA](https://adpitt6.github.io/DataScience2/EDA.html) and trying out different models in building [the MLE classifier](https://adpitt6.github.io/DataScience2/Model_1.html) as a _conscious_ approach. A really nice thing about this approach, in addition to the resulting classifier, is that we get to learn lots about how people draw things. Like, you can have a whole pizza, or you can have just a slice. Or most bananas dutifully obey the law of gravity, but some mischievous ones don't.
 
 Now we try an _unconscious_ approach. Let's put all the domain knowledge we have aside, and pretend that we never even looked at those images. Let's see if we can make up for all that with machine brute force. The question is: Can a machine learning algorithm that does not benefit from our human visual perception (and is pretty much a black box) do a decent job at classifying [_Quick! Draw_](https://quickdraw.withgoogle.com/) images? We tried one that is popular for classifying images: a [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network). We name it _OurCNN_ (not the news channel).
 
