@@ -29,21 +29,23 @@ As you can see, google recognized your image by comparing it to others of simila
 
 If you want to try also, download the data from [here](https://www.kaggle.com/c/quickdraw-doodle-recognition/data). The files can be quite large so we recommend using the simplified version unless you have access to cloud storage
 
-We built an algorithm to classify each food image. Yum!
+We took two approaches, a statistical approach (see [here](https://adpitt6.github.io/DataScience2/EDA.html) and [here](https://adpitt6.github.io/DataScience2/Model_1.html)) and a machine learning approach (see [here](https://adpitt6.github.io/DataScience2/AnUnconsciousApproach.html)) to build two algorithms to classify food images. Yum!
 
 ##### Figure 1: A Doodle from each Food Class
 
-```{r echo = FALSE, message=FALSE}
+
+```{r echo = FALSE, message=FALSE, fig.align='center', out.width='80%'}
 library(tidyverse)
 knitr::include_graphics("Sketch_30_Foods.png")
 ```
 
 
-After data exploration, hopefully you see how "creative" some people can be. (cover your eyes)
-
-Check [here](https://github.com/adpitt6/DataScience2) to see how we did it!
 
 
-And some comparison of the two models
+
+Here is a preview of how our [MLE](https://adpitt6.github.io/DataScience2/Model_1.html) and [CNN](https://adpitt6.github.io/DataScience2/AnUnconsciousApproach.html) classifiers perform.
 
 ![](docs/Classifications0.png){width=49%} ![](docs/mix_ordered_homepage.png){width=49%}
+
+
+Check [here](https://github.com/adpitt6/DataScience2) to see how we did it!
