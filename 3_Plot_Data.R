@@ -1,4 +1,12 @@
 
+### This file reads in
+# (1) the contents of "binary_data"
+# (2) the contents of "summary_data"
+
+### This file creates
+# (1) a folder called "plots" in which each category of drawing gets 2 .png files--
+# a sketch plot and a summary plot
+
 ### Load Packages
 library(Hmisc)
 library(tidyverse)

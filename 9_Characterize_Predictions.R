@@ -90,6 +90,8 @@ theme_bw()
 dev.off()
 
 ### Plot # correct predictions by class
+accuracy <- accuracy %>% arrange(truth)
+
 png("Empirical_Kernel/Correct_Classifications.png", height = 1000, width = 500)
 {
 	par(mar = c(1, 10, 5, 2) + 0.1,
@@ -102,11 +104,7 @@ png("Empirical_Kernel/Correct_Classifications.png", height = 1000, width = 500)
 }
 dev.off()
 
-
-# which foods look like other foods?
-# filter(accuracy, n.mode1 > correct) 
-
-#### Plot Predictions from the 0th model
+#### Plot Prediction Matrix from the 0th model
 pred.mat <- pred.data %>% with(table(truth, pred0))
 ord <- order(diag(pred.mat),decreasing = T)
 pred.mat <- pred.mat[ord,][,ord]
@@ -131,7 +129,7 @@ png("Empirical_Kernel/Classifications0.png", height = 1100, width = 1100)
 dev.off()
 
 #### Plot Predictions from the fourth model
-pred.mat <- pred.data %>% with(table(truth, pred0))
+pred.mat <- pred.data %>% with(table(truth, pred4))
 # use same order as above
 pred.mat <- pred.mat[ord,][,ord]
 im(pred.mat) %>% plot

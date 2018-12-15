@@ -1,3 +1,14 @@
+### This file performs k-means clustering on the image measurements
+# derived in "4_Generate_Edge_Data", and outputs kernels for the derived
+# subclasses of watermelon, pizza, bananas, and bread.
+
+### This file reads in
+# (1) contents of "cluster_data"
+
+### This file creates
+# (1) a folder called "binary_data" in which each category of drawing gets a binary .rdata file with 5,000 training images
+# (2) a folder called "binary_data_test" in which each category of drawing gets a binary .rdata file with 1,000 test images
+
 library(tidyverse)
 library(reshape2)
 library(tidyverse)
@@ -82,7 +93,6 @@ as.tibble() %>%
 mutate(x = likelihoods[[1]], y = likelihoods[[2]])
 
 likelihoods[is.na(likelihoods)] <- -50
-
 
 save(likelihoods, file = file.path("Empirical_Kernel","Clustered_Kernels.rdata"))
 

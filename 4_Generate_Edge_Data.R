@@ -1,3 +1,16 @@
+### This file reads in
+# (1) "binary_data"
+
+### This file creates
+# (1) a folder "cluster_data" containing binary files for each food class
+# (2) a transformed, nested data frame where the unit of observation is a 
+# whole image. the data frame contains:
+	# data: original image sample points
+	# data1: PCA-rotated image sample points
+	# other measurements from the image
+# (3) plots to examine clustering for each of the food classes, 
+# placed into the "plots" folder
+
 library(tidyverse)
 library(reshape2)
 source("0_Preprocessing_Functions.R")
@@ -16,6 +29,7 @@ for(i in bin.files){
 	edges <- train %>% 
 	select(-stroke) %>%
 	nest(-key_id) %>%
+		
 	# select only lowest sidehits and rightmost top/bottom hits
 	mutate(data1 = map(data, ~ rotate.vert(.) %>% integer.xy),
 	       xmax = map(data1, ~max(.$x)) %>% unlist,

@@ -1,8 +1,7 @@
 ### This file reads in
 # (1) a small csv file containing the names of the files you want to process
 # below it is labeled "foods"
-
-# (2) from each name in (1) it reads in the first 5,000 rows of the matching csv file 
+# (2) from each name in (1) it reads in the first 6,000 rows of the matching csv file 
 # from the folder "train_simplified", and it creates a tibble with the columns
 # key_id, stroke, x, and y. In this tibble, a single row represents the x,y 
 # coordinates from ONE point from ONE stroke from ONE drawing. 
@@ -10,10 +9,8 @@
 # drawing is a collection of strokes, uniquely identified by key_id
 
 ### This file creates
-
-# (1) a folder called binary data in which
-
-# (2) each category of drawing gets a binary .rdata file. 
+# (1) a folder called "binary_data" in which each category of drawing gets a binary .rdata file with 5,000 training images
+# (2) a folder called "binary_data_test" in which each category of drawing gets a binary .rdata file with 1,000 test images
 
 ### Load Some Packages
 library(tidyverse)

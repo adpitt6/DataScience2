@@ -5,7 +5,7 @@ library(caret)
 library(reshape2)
 library(Hmisc)
 #install.packages("rpart")
-library("rpart")
+library(rpart)
 
 ###############################################################################
 ### Data Loading
@@ -71,7 +71,6 @@ head(tree.data)
 # use 10-fold cross-validation
 tree.data2 <-tree.data %>%
 	group_by(truth)%>%
-	sample_n(size = 50) %>%
 	mutate(isapple = ifelse(truth=="apple", "apple", "no")) %>%
 	ungroup %>%
 	select(-pred1, -pred2)
@@ -88,17 +87,23 @@ dim(tree.data2)
 	   trControl = trainControl(method = "cv",number = 1))
 
 # try using rpart function
-tree1 <- rpart(data= select(tree.data2, -key_id, -truth),
-	   formula = isapple ~ .,
-	   method = "class", 
-	   parms = list(prior = c(29/30, 1/30)))
+tree1 <- rpart(data= select(tree.data2, -key_id, -isapple),
+	   formula = truth ~ .,
+	   method = "class",
+	   parms = list(prior = rep(1/30,30)),
+	   control =rpart.control(minsplit=20, minbucket=10, cp=0))
 
 par(mai=c(0,0,0,0) )
 plot(tree1,compress=T)
 text(tree1)
 table(tree.data2$pred2)
 
+x <- predict(tree1, type="class")
+y <- table(x, truth = tree.data2$truth)
 
+mean(diag(y) / colSums(y))
+
+summary(tree1$error.fold)
 
 png()
 
