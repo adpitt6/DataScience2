@@ -1,7 +1,8 @@
 ---
-title: "Overview"
+title: "Project Details"
+author: "Lacey Etzkorn, Trang Nguyen, Adam Pittman"
+output: html_document
 ---
-
 ## Motivation and Overview: 
 
 **Provide an overview of the project goals and the motivation for it. Consider that this will be read by people who did not see your project proposal.**
@@ -17,7 +18,7 @@ Google has released some of the doodle data, and has opened up a Kaggle competit
 
 **Anything that inspired you, such as a paper, a web site, or something we discussed in class.**
 
-
+We saw the lecture given by Dr. Jeff Leek on 10/31 & 11/5 and felt we could improve upon the algorithm presented in class. 
 
 ## Initial Questions: 
 
@@ -33,10 +34,25 @@ Data was downloaded from the Kaggle website. The website provided two types of d
 
 We also made the decision to look at just a subset of the drawing types. We wanted to keep the data down to a manageable size. We chose to look at all of the foods, a total of 30 image classes. The drawing types for the foods are listed below. For each food class, we only used 6,000 images (a small fraction of the total images) from the simplified data set. We allocated 5,000 images from each class to train our model and 1,000 images to test our model.
 
-##### Figure 1: A Doodle from each Food Class
 
-```{r echo = FALSE, message=FALSE}
-library(tidyverse)
-knitr::include_graphics("../Sketch_30_Foods.png")
-```
+## Exploratory Data Analysis
 
+**What visualizations did you use to look at your data in different ways? What are the different statistical methods you considered?** 
+
+First we plotted all 30 images to get a basic sense of the data. We explored why google labeled some as "recognized" and some as "unrecognized". If you get a chance, look at some of the unrecognized drawings. People are very "creative" when given the chance. 
+
+Following this we plotted the data in several methods to best prepare our algorithms for classification. This includes the data as points, connected lines, kernals and overlapped images.
+
+## Data Analysis:
+
+**What statistical or computational method did you apply and why? What others did you consider?**
+
+The two main approaches we used were simple maximum likelihood estimation and convolutional neural network. We considered using a regression tree for classification but had trouble appropriately cleaning the data.
+
+## Narrative and Summary:
+
+** What did you learn about the data? How did you answer the questions? How can you justify your answers? What are the limitations of the analyses? **
+
+We learned the data can certainly be messy and require a great deal of wrangling for classification formatting. We needed to think a great deal about what data to "feed" into the model. 
+
+Our biggest limitation was access to a powerful computing machine. These data are quick large and require a great deal of space to work with. Cloud/cluster access would be quite beneficial 
