@@ -2,9 +2,17 @@
 title: "Overview"
 ---
 
-## Motivation and Overview: 
 
-**Provide an overview of the project goals and the motivation for it. Consider that this will be read by people who did not see your project proposal.**
+```{r echo = FALSE, message=FALSE}
+knitr::include_graphics("../QuickDrawPic.png")
+```
+
+
+## Quick, Draw!
+
+Are your drawing skills good enough to be recognized by google?
+
+Are we good enough to build a program to recognize your drawings?
 
 Google's internet game QuickDraw prompts players to draw a given object. 
 Such objects include an apple, a kangaroo, or the Eiffel Tower. 
@@ -13,25 +21,9 @@ As the player draws the object, Google attempts to guess what the user is drawin
 In fact, Google uses user-supplied doodles to train an object recognition algorithm.
 Google has released some of the doodle data, and has opened up a Kaggle competition for teams to submit their own algorithms. The goal of competing teams is to produce an algorithm that classifies doodles in a test set.
 
-## Related Work: 
-
-**Anything that inspired you, such as a paper, a web site, or something we discussed in class.**
 
 
-
-## Initial Questions: 
-
-**What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?**
-
-Our goal is not to participate in the Kaggle competition, but rather explore and compare multiple methods for classifying sketches. We will compare a simple statistical model with a computationally heavy neural network.
-
-## Data: 
-
-**What is the data source? Document the data import, wrangling, etc.**
-
-Data was downloaded from the Kaggle website. The website provided two types of data: a raw version and a simplified version that had been pre-processed. We chose to use the pre-processed data so we could focus on the methods. 
-
-We also made the decision to look at just a subset of the drawing types. We wanted to keep the data down to a manageable size. We chose to look at all of the foods, a total of 30 image classes. The drawing types for the foods are listed below. For each food class, we only used 6,000 images (a small fraction of the total images) from the simplified data set. We allocated 5,000 images from each class to train our model and 1,000 images to test our model.
+You can download the data from here
 
 ##### Figure 1: A Doodle from each Food Class
 
