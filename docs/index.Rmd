@@ -1,10 +1,8 @@
 
 ```{r echo = FALSE, message=FALSE}
-knitr::include_graphics("..\QuickDrawPic.png")
+knitr::include_graphics("../QuickDrawPic.png")
 ```
 
-
-![](..\QuickDrawPic.png)
 
 ## Quick, Draw!
 
