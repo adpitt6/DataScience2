@@ -20,7 +20,7 @@ The first task we had was to plot a lot of drawings all at once. Looking at draw
 
 ![](plots/Apple2.png)
 ![](plots/Mushroom2.png)
-![](plots/Bread2.png")
+![](plots/Bread2.png)
 
 Even though we have plotted a ridiculous amount of images on top of one another, we can still see the underlying common object that inspired each class of drawings.
 

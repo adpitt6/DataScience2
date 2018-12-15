@@ -39,3 +39,5 @@ knitr::include_graphics("Sketch_30_Foods.png")
 
 
 After data exploration, hopefully you see how "creative" some people can be. (cover your eyes)
+
+Check [here](https://github.com/adpitt6/DataScience2) to see how we did it!
