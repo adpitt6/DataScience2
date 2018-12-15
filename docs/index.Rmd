@@ -1,6 +1,6 @@
 
 ```{r echo = FALSE, message=FALSE}
-knitr::include_graphics("../QuickDrawPic.png")
+knitr::include_graphics("QuickDrawPic.png")
 ```
 
 
@@ -20,7 +20,7 @@ Google has released some of the doodle data, and has opened up a Kaggle competit
 **How do you draw yoga?**
 
 ```{r echo = FALSE, message=FALSE}
-knitr::include_graphics("../YogaDraw.png")
+knitr::include_graphics("YogaDraw.png")
 ```
 
 
@@ -34,7 +34,7 @@ We built an algorithm to classify each food image. Yum!
 
 ```{r echo = FALSE, message=FALSE}
 library(tidyverse)
-knitr::include_graphics("../Sketch_30_Foods.png")
+knitr::include_graphics("Sketch_30_Foods.png")
 ```
 
 
