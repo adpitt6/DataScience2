@@ -82,6 +82,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -96,7 +99,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -116,6 +118,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -137,18 +176,77 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -297,7 +395,7 @@ div.tocify {
 <p>We give an example of this procedure below.</p>
 <div id="figure-1-apple-drawing-overlayed-on-the-apple-and-broccoli-density-estimates" class="section level5">
 <h5>Figure 1: Apple Drawing Overlayed on the Apple and Broccoli Density Estimates</h5>
-<p><img src="Empirical_Kernel/Apple_AppleKernel_Plot.png" /><!-- --><img src="Empirical_Kernel/Apple_BroccoliKernel_Plot.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Apple_AppleKernel_Plot.png" width="200" /><img src="Empirical_Kernel/Apple_BroccoliKernel_Plot.png" width="200" /></p>
 <p>Above we plot a single apple drawing on top of our smoothed density estimate for the apple and broccoli drawings. The red points represent the sampled points along the image path from the original data. We see that where the red points intersect the Apple kernel in higher-density regions than where the red points intersect the broccoli kernel. Hence, if we sum up the log likelihoods at each of the red points for each class, we see that the likelihood that this image is from the apple class (-462) is higher than the likelihood it is from the broccoli class (-503).</p>
 </div>
 </div>
@@ -306,20 +404,20 @@ div.tocify {
 <p>Using this approach, we labeled 1,000 imgaes from each food class. Of the 30,000 images classified, 35.5% were classified correctly. With complete random guessing, we would expect to classify correctly only 1 in 30 images (3.3%)</p>
 <div id="figure-2-classification-matrix" class="section level5">
 <h5>Figure 2: Classification Matrix</h5>
-<p><img src="Empirical_Kernel/Classifications1.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Classifications1.png" width="550" /></p>
 <p>The classification matrix above was sorted by the class-specific accuracy, and we can see that the accuracy depended highly on the food class: we can classify popsicles, pears, and bread very well (&gt; 700 images each) while we classify cake, sandwiches, and blueberries poorly (&lt; 100 images each).</p>
 <p>We also see patterns in the mis-classification–cakes and birthday cakes were often cross-classified. String beans were often labeled as bananas. Broccoli and mushrooms were confused.</p>
 <p>We see that certain labels (bread, watermelon, pizzas) seemed to be catch-alls for other foods. We asked whether our algorithm was just labeling MORE things as popsicles, pears, and bread.</p>
 </div>
 <div id="figure-3-class-positive-predictions-and-sensitivity" class="section level5">
 <h5>Figure 3: Class Positive Predictions and Sensitivity</h5>
-<p><img src="Empirical_Kernel/Model1.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Model1.png" width="200" /></p>
 <p>While we were able to label ~80% of popsicles as popsicles, only about 40% of the things we labeled popsicles were popsicles. If we examine the classification matrix above, we see that many string beans and peanuts were also labeled as popsicles.</p>
 <p>We also plot a random sample of mis-classified doodles to get a sence of where we might be going wrong.</p>
 </div>
 <div id="figure-4-a-sampler-of-misclassified-foods" class="section level5">
 <h5>Figure 4: A Sampler of Misclassified Foods</h5>
-<p><img src="Empirical_Kernel/Bad_Apples1.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Bad_Apples1.png" width="500" /></p>
 <p>In the sample above, the true labels are given in green text while the classifications are given in red. From the sample above, we see that most of the misclassified images are recognizeable to the human eye, with the exception of the watermelon, sandwich, potato, popsicle, pizza, onion, bread, asparagus, and blackberry (9/30 images).</p>
 </div>
 </div>
@@ -395,12 +493,12 @@ Accuracy
 </div>
 <div id="figure-5-accuracy-by-model-and-class" class="section level5">
 <h5>Figure 5: Accuracy by Model and Class</h5>
-<p><img src="Empirical_Kernel/Correct_Classifications.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Correct_Classifications.png" width="250" /></p>
 <p>Using Figure 5, we can examine the class-specific accuracy of our 5 models. We see that the rotation fufilled its purposes for the food classes that needed it. In our exploratory data analysis, we saw that the kernels for peanuts, potatos, and string beans became much clearer when we rotated the data. Here, we see the accuracy of model 2 is better than model 1 for those classes. Additionally, we see that the accuracy for watermelon, pizza, bananas, and bread improves when we include the cluster-derived kernels in model 4. However, these improvements all seem to come at a cost–the predictions for the other classes fall.</p>
 </div>
 <div id="figure-6-comparing-model-1-vs-5" class="section level5">
 <h5>Figure 6: Comparing Model 1 vs 5</h5>
-<p><img src="Empirical_Kernel/Classifications0.png" /><!-- --><img src="Empirical_Kernel/Classifications4.png" /><!-- --></p>
+<p><img src="Empirical_Kernel/Classifications0.png" width="550" /><img src="Empirical_Kernel/Classifications4.png" width="550" /></p>
 <p>When we examine the prediction matricies side-by-side, we see something strange about the food classes with kernels constructed after clustering or rotating. They seem to “absorb” predictions from some of the other classes. Cookies, blackberries, grapes, doughnuts, and peas are often misclassified as pizzas.</p>
 </div>
 </div>

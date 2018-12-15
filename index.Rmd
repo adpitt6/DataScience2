@@ -1,3 +1,10 @@
+---
+output: 
+    html_document:
+        theme: cosmo 
+        highlight: tango
+---
+
 
 ```{r echo = FALSE, message=FALSE, fig.align='center'}
 knitr::include_graphics("QuickDrawPic.png")
