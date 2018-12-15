@@ -105,8 +105,14 @@ myimages <- c("Empirical_Kernel/Classifications0.png",
 knitr::include_graphics(myimages)
 ```
 
+When we examine the prediction matricies side-by-side, we see something strange about the food classes with kernels constructed after clustering or rotating. They seem to "absorb" predictions from some of the other classes. Cookies, blackberries, grapes, doughnuts, and peas are often misclassified as pizzas.
+
 ## Discussion and Take-Aways
 
-Our model was very quick to construct, and predicting new images was very quick. We believe the reason for this was largely due to the fact that we kept the data in it's small form. 
+The performance of this model was pretty abysmal compared to a convolutional neural network. We truly were suprised by how badly it performed, even after incorporating extra data processing. However, our model DID incorporate an important idea: keeping the data small.
 
-For most traditional image processing and classification, the images need to be in a raster format. For an image on a 256 x 256 grid the computer has to store 65,536 numbers for each image. However, we retained the data format provided by google, which stores the images as roughly 50 ordered (x,y) pairs. Hence, we could could easily work with 5,000 images from 30 classes (only 1.5 million numbers) all at once. 
+For most traditional image processing and classification, the images need to be in a raster format. For each image on a 256 x 256 grid, the computer has to store 65,536 numbers. However, we retained the data format provided by Google, which stores the images as roughly 50 ordered (x,y) pairs. Hence, we could could easily work with 5,000 images from 30 classes (only 1.5 million numbers) all at once in R.
+
+Building Model 1 from 150,000 images and testing it on 30,000 images took less than a minute (in computer time). In comparison, fitting a neural network from a fraction of these images at a reduced quality (32 x 32 pixels) took days. Incorporating the PCA-based rotations in Models 2-5 increased our computation time substantially, but everything could still be handled in less than 30 minutes.
+
+Ideally, there could be some happy medium between these two approaches: a neural network that could utilize the smaller dimensionality of the path-style image data. Given more time on this project, we would also consider exploring some wavelet and shapelet based machine learning algorithms.
