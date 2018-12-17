@@ -4,12 +4,33 @@ library(tidyverse)
 library(keras)
 
 
+
+#### Drawing types considered ####
+
+some.edibles <- c("apple", "asparagus",
+                  "banana", "birthday cake", "blackberry", "blueberry",
+                  "bread", "broccoli",
+                  "cake", "carrot", "cookie",
+                  "donut",
+                  "grapes",
+                  "hamburger", "hot dog",
+                  "ice cream", 
+                  "lollipop",
+                  "mushroom",
+                  "onion",
+                  "peanut", "pear", "peas", "pineapple", "pizza", "popsicle",
+                  "potato", 
+                  "sandwich", "steak", "strawberry", "string bean",
+                  "watermelon")
+
+
+
 #### Function to process output from a test of the CNN classifier ####
 
 # This function extracts loss, overall accuracy, type-specific accuracy, matrix of classification probabilities
 
-test_and_process <- function(model, test = test,
-                           class.names = some.edibles) {
+test_process <- function(model, test = test,
+                         class.names = some.edibles) {
     evaluate <- model %>% evaluate(test$x, test$y)
     class <- model %>% predict_classes(test$x)
     correct <- 1*(class==test$label)
@@ -24,6 +45,7 @@ test_and_process <- function(model, test = test,
     }
     rownames(class_matrix) <- unique(test$category)
     colnames(class_matrix) <- class.names
+    class_matrix <- class_matrix[class.names,]
     
     acc_specific <- diag(class_matrix)
     
@@ -125,8 +147,8 @@ for (i in list.files(here::here("mini", "model2", "weights"))) {
     model <- create_model() %>%
         load_model_weights_hdf5(here::here("mini", "model2", "weights", i))
     
-    model_recognized   <- output_process(model = model, test = recognized)
-    model_unrecognized <- output_process(model = model, test = unrecognized)
+    model_recognized   <- test_process(model = model, test = recognized)
+    model_unrecognized <- test_process(model = model, test = unrecognized)
     
     save(model_recognized, model_unrecognized,
          file = here::here("mini", "model2", "performance", 
