@@ -1,7 +1,13 @@
 ---
 title: "Project Details"
 author: "Lacey Etzkorn, Trang Nguyen, Adam Pittman"
-output: html_document
+output: 
+    html_document:
+        theme: cosmo 
+        toc: true
+        toc_float: true
+        highlight: tango
+        number_sections: false
 ---
 ## Motivation and Overview: 
 
@@ -19,6 +25,8 @@ Google has released some of the doodle data, and has opened up a Kaggle competit
 **Anything that inspired you, such as a paper, a web site, or something we discussed in class.**
 
 We saw the lecture given by Dr. Jeff Leek on 10/31 & 11/5 and felt we could improve upon the algorithm presented in class. 
+
+We saw GuoQing's lecture on convolutional neural networks and felt we wanted to try them out.
 
 ## Initial Questions: 
 
@@ -39,9 +47,11 @@ We also made the decision to look at just a subset of the drawing types. We want
 
 **What visualizations did you use to look at your data in different ways? What are the different statistical methods you considered?** 
 
-First we plotted all 30 images to get a basic sense of the data. We explored why google labeled some as "recognized" and some as "unrecognized". If you get a chance, look at some of the unrecognized drawings. People are very "creative" when given the chance. 
+First we plotted images of all the food types to get a basic sense of the data. We explored why google labeled some as "recognized" and some as "unrecognized". If you get a chance, look at some of the unrecognized drawings. People are very "creative" when given the chance. 
 
 Following this we plotted the data in several methods to best prepare our algorithms for classification. This includes the data as points, connected lines, kernals and overlapped images.
+
+We also tried looking at the images that are centered in the frame, dropped to the bottom of the frame, scaled to frame, stretched horizontally or vertically, and rotated to horizontal or vertical orientation (based on image-specific PCA). This helped us gain a better understanding of the different types of drawings that may exist within a category, and how the drawings of different categories response to such image processing manipulations.
 
 ## Data Analysis:
 
@@ -49,10 +59,14 @@ Following this we plotted the data in several methods to best prepare our algori
 
 The two main approaches we used were simple maximum likelihood estimation and convolutional neural network. We considered using a regression tree for classification but had trouble appropriately cleaning the data.
 
+Please see more details about the methods and results within each approach on the approach-specific web pages, [here](https://adpitt6.github.io/DataScience2/Model_1.html) and [here](https://adpitt6.github.io/DataScience2/AnUnconsciousApproach.html).
+
 ## Narrative and Summary:
 
 ** What did you learn about the data? How did you answer the questions? How can you justify your answers? What are the limitations of the analyses? **
 
-We learned the data can certainly be messy and require a great deal of wrangling for classification formatting. We needed to think a great deal about what data to "feed" into the model. 
+We learned the data can certainly be messy and require a great deal of wrangling for classification formatting. We needed to think a great deal about what data to "feed" into the model, when using the statistical approach.
 
-Our biggest limitation was access to a powerful computing machine. These data are quick large and require a great deal of space to work with. Cloud/cluster access would be quite beneficial 
+The machine learning approach seems to be able to handle messy data much better. In fact, a blackberry drawing does not have to look anything like blackberries to be correctly classified. It just needs to have more shared features with other blackberry drawing than with drawings of any other type.
+
+Our biggest limitation was access to a powerful computing machine. These data are quickly large and require a great deal of space to work with. Cloud/cluster access would be quite beneficial.

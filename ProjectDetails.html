@@ -16,29 +16,15 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
 
 
 
@@ -103,34 +89,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 45px;
+  padding-top: 51px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 
 .section h2 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h3 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h4 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h5 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h6 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 </style>
 
@@ -165,6 +151,101 @@ $(document).ready(function () {
 <!-- code folding -->
 
 
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -220,6 +301,7 @@ $(document).ready(function () {
 <h2>Related Work:</h2>
 <p><strong>Anything that inspired you, such as a paper, a web site, or something we discussed in class.</strong></p>
 <p>We saw the lecture given by Dr. Jeff Leek on 10/31 &amp; 11/5 and felt we could improve upon the algorithm presented in class.</p>
+<p>We saw GuoQing’s lecture on convolutional neural networks and felt we wanted to try them out.</p>
 </div>
 <div id="initial-questions" class="section level2">
 <h2>Initial Questions:</h2>
@@ -235,23 +317,28 @@ $(document).ready(function () {
 <div id="exploratory-data-analysis" class="section level2">
 <h2>Exploratory Data Analysis</h2>
 <p><strong>What visualizations did you use to look at your data in different ways? What are the different statistical methods you considered?</strong></p>
-<p>First we plotted all 30 images to get a basic sense of the data. We explored why google labeled some as “recognized” and some as “unrecognized”. If you get a chance, look at some of the unrecognized drawings. People are very “creative” when given the chance.</p>
+<p>First we plotted images of all the food types to get a basic sense of the data. We explored why google labeled some as “recognized” and some as “unrecognized”. If you get a chance, look at some of the unrecognized drawings. People are very “creative” when given the chance.</p>
 <p>Following this we plotted the data in several methods to best prepare our algorithms for classification. This includes the data as points, connected lines, kernals and overlapped images.</p>
+<p>We also tried looking at the images that are centered in the frame, dropped to the bottom of the frame, scaled to frame, stretched horizontally or vertically, and rotated to horizontal or vertical orientation (based on image-specific PCA). This helped us gain a better understanding of the different types of drawings that may exist within a category, and how the drawings of different categories response to such image processing manipulations.</p>
 </div>
 <div id="data-analysis" class="section level2">
 <h2>Data Analysis:</h2>
 <p><strong>What statistical or computational method did you apply and why? What others did you consider?</strong></p>
 <p>The two main approaches we used were simple maximum likelihood estimation and convolutional neural network. We considered using a regression tree for classification but had trouble appropriately cleaning the data.</p>
+<p>Please see more details about the methods and results within each approach on the approach-specific web pages, <a href="https://adpitt6.github.io/DataScience2/Model_1.html">here</a> and <a href="https://adpitt6.github.io/DataScience2/AnUnconsciousApproach.html">here</a>.</p>
 </div>
 <div id="narrative-and-summary" class="section level2">
 <h2>Narrative and Summary:</h2>
 <p>** What did you learn about the data? How did you answer the questions? How can you justify your answers? What are the limitations of the analyses? **</p>
-<p>We learned the data can certainly be messy and require a great deal of wrangling for classification formatting. We needed to think a great deal about what data to “feed” into the model.</p>
-<p>Our biggest limitation was access to a powerful computing machine. These data are quick large and require a great deal of space to work with. Cloud/cluster access would be quite beneficial</p>
+<p>We learned the data can certainly be messy and require a great deal of wrangling for classification formatting. We needed to think a great deal about what data to “feed” into the model, when using the statistical approach.</p>
+<p>The machine learning approach seems to be able to handle messy data much better. In fact, a blackberry drawing does not have to look anything like blackberries to be correctly classified. It just needs to have more shared features with other blackberry drawing than with drawings of any other type.</p>
+<p>Our biggest limitation was access to a powerful computing machine. These data are quickly large and require a great deal of space to work with. Cloud/cluster access would be quite beneficial.</p>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
