@@ -32,11 +32,9 @@ knitr::include_graphics("docs/TrangPlots/CNNpix.png")
 
 ## Output
 
-a label out of 31 types of food: 
+a label out of 31 types of food: apple, asparagus, banana, birthday cake, blackberry, blueberry, bread, broccoli, cake, carrot, cookie, donut, grapes, hamburger, hot dog, ice cream, lollipop, mushroom, onion, peanut, pear, peas, pineapple, pizza, popsicle, potato, sandwich, steak, strawberry, string bean, watermelon
 
-apple, asparagus, banana, birthday cake, blackberry, blueberry, bread, broccoli, cake, carrot, cookie, donut, grapes, hamburger, hot dog, ice cream, lollipop, mushroom, onion, peanut, pear, peas, pineapple, pizza, popsicle, potato, sandwich, steak, strawberry, string bean, watermelon
-
-note: This is one category more than the number of categories that went into the MLE classifier. Just an error in copying text :-)
+Note: This is one category more than the number of categories that went into the MLE classifier. Just an error in copying text :-)
 
 ## Inside the box
 
@@ -102,9 +100,6 @@ knitr::include_graphics("docs/TrangPlots/model2_epochs_recognized.png")
 ```
 
 
-We experienced here that a more powerful model performs better than a less powerful model. One with 20 (instead of 32) filters in each convolution layer and 128 (instead of 256) neurons in the dense layer has slightly lower accuracy. Also, more training data results in better accuracy, on the same model.
-
-We could not afford to handle either a more powerful model (e.g., with an additional dense layer) or more data (either more images or higher resolution). This one took more than two days to train on a laptop computer.
 
 ### d. Data
 
@@ -143,6 +138,12 @@ knitr::include_graphics("docs/TrangPlots/rec_unrec_blackberry.png")
 ```
 
 
+### What we noticed in training _OurCNN_
+
+A more powerful model performs better than a less powerful model. One with 20 (instead of 32) filters in each convolution layer and 128 (instead of 256) neurons in the dense layer has slightly lower accuracy. Also, more training data results in better accuracy, on the same model.
+
+We could not afford to handle either a more powerful model (e.g., with an additional dense layer) or more data (either more images or higher resolution). This one took more than two days to train on a laptop computer.
+
 
 # _OurCNN_ performance
 
@@ -169,10 +170,10 @@ knitr::include_graphics("docs/TrangPlots/recognized_ordered.png")
 
 It does not bad!
 
-_OurCNN_ is a black box. We don't know what goes on inside it, like what the filters look like, what the weights of the nodes are, what thresholds are involved in activation, what factors are used for batch normalization, etc.
+_OurCNN_ is a black box. We don't know what goes on inside it, like what the filters look like, what the weights of the nodes are, what thresholds are involved in activation, what factors are used for batch normalization, etc. Well, maybe when we learn Python, we will be able to look inside the black box to see if we can gain some insight. (We implemented this using the <tt>R</tt> package <tt>keras</tt> and do not have access to appropriate functions to tease out information from the model object.)
 
 
-But we can observe its behavior to satisfy our human desire to learn.
+But, we can observe _OurCNN_'s behavior to satisfy our human desire to learn.
 
 
 It is clear _OurCNN_ does better for some food types and worse for others. Cakes and birthday cakes are often confused. And from the perspective of _OurCNN_, some blackberries probably look like grapes.
@@ -239,7 +240,7 @@ While _OurCNN_ is nothing compared to Google AI, it is limited by several resour
 
 We trained this version of _OurCNN_ on a laptop. If we manage to use Hopkins's cluster computing resources for the training, we would be able to see if we can get a more powerful version of _OurCNN_ and see how it compares with Google AI.
 
-Comparing these two early products -- or prototypes, to be precise -- from the Conscious and Unconscious approaches, we venture to say that the Unconscious approach is a contender. Perhaps humans and machines have different ways to see things that both are valuable.
+Comparing these two early products -- or prototypes, to be precise -- from the Conscious and Unconscious approaches, we venture to say that the Unconscious approach is a serious contender. Perhaps humans and machines have different ways to see things that both are valuable.
 
 But, let's recognize that such comparison is unreasonable. We know well (from the data reduction plots above) that the MLE classifier is malnourished. With a lot more data (both data from each image and number of images), the MLE classifier might be a lot more powerful. Also, there are a lot of options for the _conscious_ model building approach. We have seen five MLE models, but our human creativity can keep coming up with more models and better ones.
 
