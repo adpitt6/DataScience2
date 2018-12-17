@@ -19,7 +19,12 @@ We can think of the approach of doing a lot of [EDA](https://adpitt6.github.io/D
 Now we try an _unconscious_ approach. Let's put all the domain knowledge we have aside, and pretend that we never even looked at those images. Let's see if we can make up for all that with machine brute force. The question is: Can a machine learning algorithm that does not benefit from our human visual perception (and is pretty much a black box) do a decent job at classifying [_Quick! Draw_](https://quickdraw.withgoogle.com/) images? We tried one that is popular for classifying images: a [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network). We name it _OurCNN_ (not the news channel).
 
 
-# _OurCNN_ specs
+# _OurCNN_ specs -- version 1.0
+
+```{r ourcnn, echo=FALSE, fig.align='center', out.width = '85%'}
+knitr::include_graphics("docs/TrangPlots/CNNpix.png")
+```
+
 
 ## Input
 
@@ -239,3 +244,5 @@ Comparing these two early products -- or prototypes, to be precise -- from the C
 But, let's recognize that such comparison is unreasonable. We know well (from the data reduction plots above) that the MLE classifier is malnourished. With a lot more data (both data from each image and number of images), the MLE classifier might be a lot more powerful. Also, there are a lot of options for the _conscious_ model building approach. We have seen five MLE models, but our human creativity can keep coming up with more models and better ones.
 
 As for the _unconscious_ approach, it would be nice to build a classifier that takes in a combination of image data and non-image features (e.g., country of orgin or anything else we might know about an image in a specific application), and thus uses all the available data for classification. We just have to go do that and come back to you.
+
+Code and data for this component of our project are available [here](https://github.com/adpitt6/DataScience2/tree/master/CNNComponent).

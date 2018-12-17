@@ -79,9 +79,6 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
@@ -96,6 +93,7 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
+
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -115,43 +113,6 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -173,77 +134,18 @@ $(document).ready(function () {
 });
 </script>
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
 </script>
 
 <!-- code folding -->
+
 
 
 
@@ -289,7 +191,7 @@ $(document).ready(function () {
 </div>
 
 
-<p><img src="QuickDrawPic.png" width="400" style="display: block; margin: auto;" /></p>
+<p><img src="QuickDrawPic.png" style="display: block; margin: auto;" /></p>
 <p><a href="https://quickdraw.withgoogle.com/">Image source</a></p>
 <div id="quick-draw" class="section level2">
 <h2>Quick, Draw!</h2>
@@ -297,7 +199,7 @@ $(document).ready(function () {
 <p><strong>Are we good enough to build a program to recognize your drawings?</strong></p>
 <p>Google’s internet game QuickDraw prompts players to draw a given object. Such objects include an apple, a kangaroo, or the Eiffel Tower. You can play the game here: <a href="https://quickdraw.withgoogle.com" class="uri">https://quickdraw.withgoogle.com</a>. As the player draws the object, Google attempts to guess what the user is drawing. In fact, Google uses user-supplied doodles to train an object recognition algorithm. Google has released some of the doodle data, and has opened up a Kaggle competition for teams to submit their own algorithms. The goal of competing teams is to produce an algorithm that classifies doodles in a test set.</p>
 <p><strong>How do you draw yoga?</strong></p>
-<p><img src="YogaDraw.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="YogaDraw.png" style="display: block; margin: auto;" /></p>
 <p>As you can see, google recognized your image by comparing it to others of similar nature. This is what we tried to replicate! Some of the drawings can be really abstract, like animal migration.</p>
 <p>If you want to try also, download the data from <a href="https://www.kaggle.com/c/quickdraw-doodle-recognition/data">here</a>. The files can be quite large so we recommend using the simplified version unless you have access to cloud storage</p>
 <p>We took two approaches, a statistical approach (see <a href="https://adpitt6.github.io/DataScience2/EDA.html">here</a> and <a href="https://adpitt6.github.io/DataScience2/Model_1.html">here</a>) and a machine learning approach (see <a href="https://adpitt6.github.io/DataScience2/AnUnconsciousApproach.html">here</a>) to build two algorithms to classify food images. Yum!</p>
