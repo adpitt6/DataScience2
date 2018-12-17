@@ -158,3 +158,43 @@ for (i in list.files(here::here("mini", "model2", "weights"))) {
     rm(model, model_recognized, model_unrecognized)
 }
 
+
+
+#### Plot loss and accuracy on the Google-recognized test set, across the epochs ####
+
+loss_accuracy <- NULL
+
+for (i in list.files(here::here("mini", "model2", "performance"))) {
+    
+    load(here::here("mini", "model2", "performance", i))
+    
+    loss_accuracy <- loss_accuracy %>%
+        bind_rows(data.frame(loss  = model_recognized$loss,
+                             acc   = model_recognized$acc.overall))
+    
+    rm(model_recognized, model_unrecognized)
+}
+
+# This plot is used on our website <https://adpitt6.github.io/DataScience2/AnUnconsciousApproach.html>
+
+png(here::here("mini", "model2", "outputs", "lossAccuracy",
+               "model2_epochs_recognized.png"),
+    width = 600, height = 400)
+loss_accuracy %>%
+    bind_cols(data.frame(epoch = 1:20)) %>%
+    gather(key, value, -epoch) %>%
+    mutate(key = factor(key, levels = c("loss", "acc"))) %>%
+    ggplot(aes(x = epoch, y = value)) +
+    geom_line() +
+    geom_point() +
+    labs(title = "Loss and accuracy of model2 epochs on Google-recognized test set",
+         y = "") +
+    facet_grid(key ~ .) +
+    theme_bw()
+dev.off()
+
+# This plot shows that epoch 12 has the lowest loss (0.6081) and highest accuracy (0.8052581) on the fair test set. This is consistent which the epoch favored by loss and accuracy on the validation set.
+
+# Conclusion: we choose the model at the end of epoch 12.
+
+

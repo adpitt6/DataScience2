@@ -83,22 +83,29 @@ batch size 32
 
 use 5000 images per type, split 4:1 into training and validation sets
 
-pick the model at the epoch that combines _lowest validation loss_ and _highest validation accuracy_, here epoch 12 -- see the training history below
+We pick the model at the epoch that combines _lowest loss_ and _highest accuracy_, here epoch 12 on the validation set (see the training history below)
 
 ```{r history, echo=FALSE, fig.align='center', out.width = '70%'}
 knitr::include_graphics("docs/TrangPlots/model2_history.png")
 ```
 
 
-We experienced here that a more powerful model performs better. One with 20 (instead of 32) filters in each convolution layer and 128 (instead of 256) neurons in the dense layer has slightly lower accuracy. Also, more training data results in better accuracy, on the same model.
+and on a separate test set (see below).
 
-We could not afford to handle either a more powerful model or more data. This one took two days to train on a laptop computer that needs to be used for other work :-)
+```{r lossaccuracyrecognized, echo=FALSE, fig.align='center', out.width = '60%'}
+knitr::include_graphics("docs/TrangPlots/model2_epochs_recognized.png")
+```
+
+
+We experienced here that a more powerful model performs better than a less powerful model. One with 20 (instead of 32) filters in each convolution layer and 128 (instead of 256) neurons in the dense layer has slightly lower accuracy. Also, more training data results in better accuracy, on the same model.
+
+We could not afford to handle either a more powerful model (e.g., with an additional dense layer) or more data (either more images or higher resolution). This one took more than two days to train on a laptop computer.
 
 ### d. Data
 
 #### Data reduction
 
-_Quick! Draw_ images are black-and-white and come in 256-by-256 resolution. The data are stroke data, i.e., for each stroke of the pen, a series of points are stored such that if you connect them with straight segments, you recover the stroke.
+_Quick, Draw!_ images are black-and-white and come in 256-by-256 resolution. The data are stroke data, i.e., for each stroke of the pen, a series of points are stored such that if you connect them with straight segments, you recover the stroke.
 
 The MLE classifier keeps the original resolution, but uses only the points that define the segments.
 
