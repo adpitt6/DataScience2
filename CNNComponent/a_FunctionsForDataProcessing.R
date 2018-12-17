@@ -66,6 +66,18 @@ get_images <- function(category, recognized = NULL) {
 
 
 
+#### Function to get one image ####
+
+get_one <- function(category, recognized = TRUE) {
+    
+    status <- ifelse(recognized==TRUE, "True", "False")
+    
+    readRDS(here::here("data", "raw", paste0(category, "_raw.rds"))) %>%
+        filter(recognized==status) %>%
+        sample_n(1) %>%
+        select(-c(timestamp, word, countrycode, recognized))
+}
+
 
 #### Funtion to turn raw data (resulting from get_images()) into strokes format ####
 
